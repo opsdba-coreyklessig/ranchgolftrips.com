@@ -8,14 +8,14 @@
     <style>
         /* --- THEME VARIABLES --- */
         :root {
-            --felt-green: #1a472a; /* Deep Poker Table Green */
+            --felt-green: #1a472a; 
             --bright-green: #2e7d32;
-            --gold: #f4c430;       /* Trophy Gold */
+            --gold: #f4c430;       
             --gold-gradient: linear-gradient(180deg, #f9e29a 0%, #d4af37 100%);
-            --wood: #5d4037;       /* Wood Border */
+            --wood: #5d4037;       
             --card-white: #fdfdfd;
             --text-dark: #222;
-            --red-accent: #b71c1c; /* Casino Red */
+            --red-accent: #b71c1c; 
         }
 
         /* --- RESET & BASIC SETUP --- */
@@ -135,12 +135,12 @@
         }
         .btn-register-nav:hover { background: #d32f2f; color: white !important; }
 
-        /* --- HERO & BANNER --- */
+        /* --- HERO & BANNER STYLES --- */
         .hero-section { 
             text-align: center; 
             background: #000; 
             position: relative; 
-            line-height: 0; /* Prevents white space under image */
+            line-height: 0;     
             border-bottom: 5px solid var(--gold);
         }
         
@@ -155,7 +155,7 @@
             background: #222; color: var(--gold); padding: 20px 0; text-align: center;
             border-bottom: 2px solid var(--wood); display: flex;
             justify-content: center; align-items: center; flex-wrap: wrap; gap: 20px;
-            line-height: 1.5; 
+            line-height: 1.5; /* Reset line-height for text */
         }
         
         .timer-unit {
@@ -339,7 +339,6 @@
             .section-title { font-size: 1.8rem; }
             .code-display { font-size: 2rem; padding: 10px 20px; letter-spacing: 2px; }
             
-            /* Stack teams on mobile despite the grid setting */
             .team-grid { grid-template-columns: 1fr; } 
         }
     </style>
@@ -397,7 +396,7 @@
             <img src="Banner-Final.png" 
                  alt="2026 Robson Ranch Invitational Banner" 
                  class="banner-img"
-                 onerror="this.src='https://dummyimage.com/1200x600/1a472a/f4c430.png&text=2026+ROBSON+RANCH+INVITATIONAL'">
+                 onerror="this.src='https://dummyimage.com/1200x600/1a472a/f4c430.png&text=PLACEHOLDER+BANNER'">
         </div>
 
         <div class="countdown-bar">
@@ -464,7 +463,7 @@
 
                 <div class="format-item">
                     <h3>Day 1: Monday, March 23 (Stonebridge)</h3>
-                    <span class="format-sub">Format: Scramble / Alternate Shot</span>
+                    <span class="format-sub">Format: 2-Man Scramble (9 Holes) / Alternate Shot (9-Holes)</span>
                     <p><strong>10:00 AM Shotgun Start</strong></p>
                     <p>Matchups: Team 1 vs Team 2 / Team 3 vs Team 4</p>
                     <p>Lodging: Bally's Resort & Casino</p>
@@ -472,7 +471,7 @@
 
                 <div class="format-item">
                     <h3>Day 2: Tuesday, March 24 (Cypress Bend)</h3>
-                    <span class="format-sub">Format: Best Ball</span>
+                    <span class="format-sub">Format: 2-Man Best Ball</span>
                     <p>Depart Shreveport 9:00am (78 miles). Arrive Cypress Bend 11:00am.</p>
                     <p><strong>1:00 PM Tee Times</strong></p>
                     <p>Matchups: Team 1 vs Team 3 / Team 2 vs Team 4</p>
@@ -481,7 +480,7 @@
 
                 <div class="format-item">
                     <h3>Day 3: Wednesday, March 25 (The Tempest)</h3>
-                    <span class="format-sub">Format: Singles Play + Low Gross/Net</span>
+                    <span class="format-sub">Format: Low Gross/Low Net (White Tees) & Low Gross/Low Net (Gold Tees)</span>
                     <p>Travel to Gladewater (2 hrs). Arrive 9:30am.</p>
                     <p><strong>10:30 AM Tee Times</strong></p>
                     <p>Matchups: Team 1 vs Team 4 / Team 2 vs Team 3</p>
@@ -504,7 +503,7 @@
                     <div class="card-body">
                         <div class="detail-row"><span class="icon">📍</span> Bossier City, LA</div>
                         <div class="detail-row"><span class="icon">⛳</span> Monday, 10am Shotgun</div>
-                        <p><strong>Format:</strong> Scramble / Alt Shot</p>
+                        <p><strong>Format:</strong> 2-Man Scramble / Alt Shot</p>
                     </div>
                 </div>
 
@@ -516,7 +515,7 @@
                     <div class="card-body">
                         <div class="detail-row"><span class="icon">📍</span> Many, LA (Toledo Bend)</div>
                         <div class="detail-row"><span class="icon">⏰</span> Tuesday, 1pm Tee Times</div>
-                        <p><strong>Format:</strong> Best Ball</p>
+                        <p><strong>Format:</strong> 2-Man Best Ball</p>
                     </div>
                 </div>
 
@@ -528,7 +527,7 @@
                     <div class="card-body">
                         <div class="detail-row"><span class="icon">📍</span> Gladewater, TX</div>
                         <div class="detail-row"><span class="icon">⏰</span> Wednesday, 10:30am</div>
-                        <p><strong>Format:</strong> Singles Play</p>
+                        <p><strong>Format:</strong> Low Gross / Low Net</p>
                     </div>
                 </div>
 
