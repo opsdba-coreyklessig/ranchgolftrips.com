@@ -10,9 +10,9 @@
         :root {
             --felt-green: #1a472a; 
             --bright-green: #2e7d32;
-            --gold: #f4c430;       
+            --gold: #f4c430;        
             --gold-gradient: linear-gradient(180deg, #f9e29a 0%, #d4af37 100%);
-            --wood: #5d4037;       
+            --wood: #5d4037;        
             --card-white: #fdfdfd;
             --text-dark: #222;
             --red-accent: #b71c1c; 
@@ -140,7 +140,7 @@
             text-align: center; 
             background: #000; 
             position: relative; 
-            line-height: 0;     
+            line-height: 0;      
             border-bottom: 5px solid var(--gold);
         }
         
@@ -254,12 +254,19 @@
             font-size: 0.95rem;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             transition: transform 0.2s;
+            display: flex;
+            flex-direction: column;
         }
         
         .roster-item:hover {
             transform: translateX(5px);
             border-left-color: var(--gold);
         }
+
+        /* NEW STYLES FOR DYNAMIC ROSTER DATA */
+        .r-name { font-size: 1rem; color: #222; text-transform: uppercase; }
+        .r-meta { font-size: 0.8rem; color: #555; margin-top: 4px; font-weight: normal; }
+        .r-loading { color: #fff; font-size: 1.2rem; text-align: center; grid-column: 1 / -1; }
 
         /* --- INFO SECTIONS --- */
         .letter-section {
@@ -571,43 +578,8 @@
                 </a>
             </div>
 
-            <div class="roster-grid">
-                <div class="roster-item">Bent, Bruce</div>
-                <div class="roster-item">Berryhill, Joshua</div>
-                <div class="roster-item">Buckrucker, Kevin</div>
-                <div class="roster-item">Burns, Jimmy</div>
-                <div class="roster-item">Carey, Llynal</div>
-                <div class="roster-item">Clark, Tyler</div>
-                <div class="roster-item">Difonzo, Bob</div>
-                <div class="roster-item">Donehue, Pat</div>
-                <div class="roster-item">Eason, Johnny</div>
-                <div class="roster-item">Emerton, Dave</div>
-                <div class="roster-item">Finnell, Dave</div>
-                <div class="roster-item">Gathier, Harley</div>
-                <div class="roster-item">Gibson, John</div>
-                <div class="roster-item">Hajdyla, Kenneth</div>
-                <div class="roster-item">Hicks, Greg</div>
-                <div class="roster-item">Hughes, Doyle</div>
-                <div class="roster-item">Hull, Tim</div>
-                <div class="roster-item">Jedlowski, Larry</div>
-                <div class="roster-item">Klessig, Rich</div>
-                <div class="roster-item">Knowles, Corey</div>
-                <div class="roster-item">Lackey, Jim</div>
-                <div class="roster-item">Liske, Dean</div>
-                <div class="roster-item">Miloser, John</div>
-                <div class="roster-item">Moen, Mike</div>
-                <div class="roster-item">Murphy, Dave</div>
-                <div class="roster-item">Paugh, Kevin</div>
-                <div class="roster-item">Reed, Sam</div>
-                <div class="roster-item">Shaffer, Donny</div>
-                <div class="roster-item">Shoff, Mark</div>
-                <div class="roster-item">Smith, Randy</div>
-                <div class="roster-item">Smith, Carl</div>
-                <div class="roster-item">Stewart, Gary</div>
-                <div class="roster-item">Tefft, Dennis</div>
-                <div class="roster-item">Thompson, Scott</div>
-                <div class="roster-item">Watts, Virgil</div>
-                <div class="roster-item">Williams, Jeff</div>
+            <div class="roster-grid" id="roster-grid">
+                <div class="r-loading">Loading Roster from Sheet...</div>
             </div>
         </div>
 
@@ -962,10 +934,105 @@
             setTimeout(function() {
                 document.getElementById('partyModal').style.display = 'flex';
             }, 1000); 
+            // Load the roster immediately
+            loadRoster();
         };
 
         function closeModal() {
             document.getElementById('partyModal').style.display = 'none';
+        }
+
+        // --- GOOGLE SHEET FETCH LOGIC ---
+        async function loadRoster() {
+            const sheetId = '14yvwtXhF5zR-9dOmgxT9lYls_XXAyfELrKSrxyuneQo';
+            const gid = '0';
+            const csvUrl = `https://docs.google.com/spreadsheets/d/${sheetId}/export?format=csv&gid=${gid}`;
+
+            try {
+                const response = await fetch(csvUrl);
+                const text = await response.text();
+                const rows = parseCSV(text);
+                
+                const grid = document.getElementById('roster-grid');
+                grid.innerHTML = ''; // Clear loading message
+
+                // Loop through rows (Skip header row 0)
+                // Col 0: Name, Col 2: Handicap, Col 3: Tees (Based on common structure)
+                for (let i = 1; i < rows.length; i++) {
+                    const row = rows[i];
+                    if (row.length < 1) continue;
+                    
+                    const name = row[0] || "Unknown";
+                    const handicap = row[2] || "-";
+                    const tees = row[3] || "TBD";
+                    
+                    // Simple title case for readability if name is all caps
+                    const displayName = toTitleCase(name);
+
+                    // Create HTML elements
+                    const item = document.createElement('div');
+                    item.className = 'roster-item';
+                    
+                    item.innerHTML = `
+                        <span class="r-name">${displayName}</span>
+                        <span class="r-meta">
+                            <strong>HCP:</strong> ${handicap} &nbsp;•&nbsp; <strong>Tees:</strong> ${tees}
+                        </span>
+                    `;
+                    
+                    grid.appendChild(item);
+                }
+
+            } catch (error) {
+                console.error("Error fetching roster:", error);
+                document.getElementById('roster-grid').innerHTML = '<div style="color:white;">Failed to load roster. Please check connection.</div>';
+            }
+        }
+
+        // Helper to parse CSV (Handles quotes correctly)
+        function parseCSV(text) {
+            let rows = [];
+            let row = [];
+            let inQuote = false;
+            let currentCell = "";
+            for (let i = 0; i < text.length; i++) {
+                let char = text[i];
+                let nextChar = text[i+1];
+                
+                if (char === '"') {
+                    if (inQuote && nextChar === '"') {
+                        currentCell += '"';
+                        i++; 
+                    } else {
+                        inQuote = !inQuote;
+                    }
+                } else if (char === ',' && !inQuote) {
+                    row.push(currentCell);
+                    currentCell = "";
+                } else if ((char === '\r' || char === '\n') && !inQuote) {
+                    if (currentCell || row.length > 0) row.push(currentCell);
+                    if (row.length > 0) rows.push(row);
+                    row = [];
+                    currentCell = "";
+                    if (char === '\r' && nextChar === '\n') i++;
+                } else {
+                    currentCell += char;
+                }
+            }
+            if (currentCell || row.length > 0) {
+                row.push(currentCell);
+                rows.push(row);
+            }
+            return rows;
+        }
+
+        function toTitleCase(str) {
+            return str.replace(
+                /\w\S*/g,
+                function(txt) {
+                    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                }
+            );
         }
     </script>
 </body>
