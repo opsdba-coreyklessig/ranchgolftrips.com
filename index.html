@@ -135,9 +135,16 @@
         }
         .btn-register-nav:hover { background: #d32f2f; color: white !important; }
 
-        /* --- HERO & BANNER --- */
+        /* --- HERO & BANNER (FIXED WIDTH) --- */
         .hero-section { text-align: center; background: #000; position: relative; }
-        .banner-img { width: 100%; height: auto; display: block; max-height: 80vh; object-fit: contain; border-bottom: 5px solid var(--gold); }
+        
+        .banner-img { 
+            width: 100%; 
+            height: auto; 
+            display: block; 
+            /* Removed max-height so it forces full width */
+            border-bottom: 5px solid var(--gold); 
+        }
 
         /* --- COUNTDOWN TIMER --- */
         .countdown-bar {
