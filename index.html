@@ -885,6 +885,10 @@
                     <li>Dale Valentine</li>
                 </ul>
                 <br>
+                <br>
+                <p style="font-size: 0.9rem; color: #666;">
+                    &copy; 2026 All Rights Reserved | RanchGolfTrips.com
+                </p>
             </div>
         </footer>
 
@@ -957,13 +961,13 @@
                 grid.innerHTML = ''; // Clear loading message
 
                 // Loop through rows (Skip header row 0)
-                // Col 0: Name, Col 2: Handicap, Col 3: Tees (Based on common structure)
+                // Col 0: Name, Col 2: Handicap (now displayed as Index), Col 3: Tees
                 for (let i = 1; i < rows.length; i++) {
                     const row = rows[i];
                     if (row.length < 1) continue;
                     
                     const name = row[0] || "Unknown";
-                    const handicap = row[2] || "-";
+                    const indexVal = row[2] || "-"; // Keeping col 2 but displaying as Index
                     const tees = row[3] || "TBD";
                     
                     // Simple title case for readability if name is all caps
@@ -976,7 +980,7 @@
                     item.innerHTML = `
                         <span class="r-name">${displayName}</span>
                         <span class="r-meta">
-                            <strong>HCP:</strong> ${handicap} &nbsp;•&nbsp; <strong>Tees:</strong> ${tees}
+                            <strong>Index:</strong> ${indexVal}  •  <strong>Tees:</strong> ${tees}
                         </span>
                     `;
                     
