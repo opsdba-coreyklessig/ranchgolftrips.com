@@ -155,7 +155,7 @@
             background: #222; color: var(--gold); padding: 20px 0; text-align: center;
             border-bottom: 2px solid var(--wood); display: flex;
             justify-content: center; align-items: center; flex-wrap: wrap; gap: 20px;
-            line-height: 1.5; /* Reset line-height for text */
+            line-height: 1.5; 
         }
         
         .timer-unit {
@@ -167,7 +167,7 @@
         .timer-val { font-size: 1.8rem; font-weight: bold; font-family: 'Courier New', monospace; display: block; color: var(--gold); }
         .timer-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; color: #fff; }
 
-        /* --- LEADERBOARD STYLES (NEW) --- */
+        /* --- LEADERBOARD STYLES --- */
         .leaderboard-box {
             background: var(--card-white); border: 4px solid var(--gold);
             border-radius: 8px; overflow: hidden; margin-bottom: 40px;
@@ -212,6 +212,34 @@
 
         .team-name-cell { text-align: left !important; color: var(--text-dark); }
         .total-cell { color: var(--red-accent); font-size: 1.3rem; font-weight: 900; }
+
+        /* --- ROSTER GRID STYLES (NEW) --- */
+        .roster-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 15px;
+            text-align: left;
+            background: rgba(0,0,0,0.2);
+            padding: 20px;
+            border: 2px solid var(--gold);
+            border-radius: 8px;
+        }
+        
+        .roster-item {
+            background: #fff;
+            padding: 12px;
+            border-radius: 4px;
+            border-left: 5px solid var(--felt-green);
+            font-weight: bold;
+            font-size: 0.95rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+        
+        .roster-item:hover {
+            transform: translateX(5px);
+            border-left-color: var(--gold);
+        }
 
         /* --- INFO SECTIONS --- */
         .letter-section {
@@ -386,8 +414,8 @@
             .code-display { font-size: 2rem; padding: 10px 20px; letter-spacing: 2px; }
             
             .team-grid { grid-template-columns: 1fr; }
-            
             .lb-table th, .lb-table td { padding: 10px 5px; font-size: 0.9rem; }
+            .roster-grid { grid-template-columns: 1fr 1fr; }
         }
     </style>
 </head>
@@ -428,6 +456,7 @@
                 <a class="nav-logo" href="#">RR INVITATIONAL '26</a>
                 <div class="nav-links">
                     <span onclick="scrollToId('leaderboard')">Leaderboard</span>
+                    <span onclick="scrollToId('roster')">Roster</span>
                     <span onclick="scrollToId('info')">Info & Fees</span>
                     <span onclick="scrollToId('schedule')">Schedule</span>
                     <span onclick="scrollToId('courses')">Courses</span>
@@ -509,6 +538,52 @@
                         </tr>
                     </tbody>
                 </table>
+            </div>
+        </div>
+
+        <div class="container" id="roster">
+            <h2 class="section-title">♣ The Field (2026 Roster) ♣</h2>
+            <div class="roster-grid">
+                <div class="roster-item">Bent, Bruce</div>
+                <div class="roster-item">Berryhill, Joshua</div>
+                <div class="roster-item">Buckrucker, Kevin</div>
+                <div class="roster-item">Burns, Jimmy</div>
+                <div class="roster-item">Carey, Llynal</div>
+                <div class="roster-item">Clark, Tyler</div>
+                <div class="roster-item">Difonzo, Bob</div>
+                <div class="roster-item">Donehue, Pat</div>
+                <div class="roster-item">Eason, Johnny</div>
+                <div class="roster-item">Emerton, Dave</div>
+                <div class="roster-item">Finnell, Harley</div>
+                <div class="roster-item">Gathier, John</div>
+                <div class="roster-item">Gibson, Kenneth</div>
+                <div class="roster-item">Hajdyla, Greg</div>
+                <div class="roster-item">Hicks, Doyle</div>
+                <div class="roster-item">Hughes, Tim</div>
+                <div class="roster-item">Hull, Larry</div>
+                <div class="roster-item">Jedlowski, Rich</div>
+                <div class="roster-item">Klessig, Corey</div>
+                <div class="roster-item">Knowles, Jim</div>
+                <div class="roster-item">Lackey, Dean</div>
+                <div class="roster-item">Liske, John</div>
+                <div class="roster-item">Miloser, Mike</div>
+                <div class="roster-item">Moen, Dave</div>
+                <div class="roster-item">Murphy, Kevin</div>
+                <div class="roster-item">Paugh, Sam</div>
+                <div class="roster-item">Reed, Donny</div>
+                <div class="roster-item">Shaffer, Mark</div>
+                <div class="roster-item">Shoff, Randy</div>
+                <div class="roster-item">Smith, Carl</div>
+                <div class="roster-item">Smith, Gary</div>
+                <div class="roster-item">Stewart, Dennis</div>
+                <div class="roster-item">Tefft, Scott</div>
+                <div class="roster-item">Thompson, Virgil</div>
+                <div class="roster-item">Watts, Jeff</div>
+                <div class="roster-item">Williams, Ron</div>
+                <div class="roster-item" style="color: #888;">TBD</div>
+                <div class="roster-item" style="color: #888;">TBD</div>
+                <div class="roster-item" style="color: #888;">TBD</div>
+                <div class="roster-item" style="color: #888;">TBD</div>
             </div>
         </div>
 
