@@ -1068,14 +1068,18 @@
                     const row = rows[i];
                     if (row.length < 1) continue;
                     
-                    // CORRECTED DATA MAPPING BASED ON YOUR SHEET
-                    // A=0, B=1, C=2, D=3, E=4, F=5, G=6, H=7(Bio), I=8(Avatar)
+                    // CORRECTED DATA MAPPING BASED ON YOUR REQUEST:
+                    // Name (Col A) -> Index 0
+                    // Index (Col D) -> Index 3
+                    // Tee Box (Col E) -> Index 4
+                    // Bio (Col I) -> Index 8
+                    // Avatar (Col J) -> Index 9
                     const p = {
-                        name: toTitleCase(row[0] || "Unknown"), // Col A: Name
-                        index: row[2] || "-",               // Col C: Index (Index 2)
-                        tees: row[3] || "TBD",              // Col D: Tee Box (Index 3)
-                        bio: row[7] || "No bio available.", // Col H: BIO (Index 7)
-                        avatar: row[8] || ""                // Col I: Avatar Link (Index 8)
+                        name: toTitleCase(row[0] || "Unknown"),
+                        index: row[3] || "-",
+                        tees: row[4] || "TBD",
+                        bio: row[8] || "No bio available.",
+                        avatar: row[9] || ""
                     };
 
                     // PREPARE AVATAR HTML
