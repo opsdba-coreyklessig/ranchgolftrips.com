@@ -236,7 +236,7 @@
 
         .roster-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Slightly wider for avatar */
             gap: 15px;
             text-align: left;
             background: rgba(0,0,0,0.2);
@@ -245,28 +245,98 @@
             border-radius: 8px;
         }
         
+        /* Updated Roster Item for Avatar */
         .roster-item {
             background: #fff;
-            padding: 12px;
+            padding: 10px;
             border-radius: 4px;
             border-left: 5px solid var(--felt-green);
-            font-weight: bold;
-            font-size: 0.95rem;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             transition: transform 0.2s;
             display: flex;
-            flex-direction: column;
+            align-items: center; /* Vertically center */
+            gap: 15px; /* Space between avatar and text */
+            cursor: pointer;
+            position: relative;
         }
         
         .roster-item:hover {
             transform: translateX(5px);
             border-left-color: var(--gold);
+            background-color: #f9f9f9;
         }
 
-        /* NEW STYLES FOR DYNAMIC ROSTER DATA */
-        .r-name { font-size: 1rem; color: #222; text-transform: uppercase; }
-        .r-meta { font-size: 0.8rem; color: #555; margin-top: 4px; font-weight: normal; }
+        /* Small Avatar in List */
+        .roster-thumb {
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            background: #eee;
+            border: 2px solid var(--gold);
+            object-fit: cover;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: bold; color: var(--felt-green); font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .roster-text {
+            display: flex; flex-direction: column;
+        }
+
+        .r-name { font-size: 1rem; color: #222; text-transform: uppercase; font-weight: bold; }
+        .r-meta { font-size: 0.8rem; color: #555; margin-top: 2px; }
         .r-loading { color: #fff; font-size: 1.2rem; text-align: center; grid-column: 1 / -1; }
+
+        /* --- PLAYER BIO MODAL STYLES --- */
+        .bio-card {
+            background: #fff; padding: 0 !important; overflow: hidden;
+            border: 4px solid var(--gold); max-width: 450px; width: 90%;
+            text-align: center; border-radius: 8px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+        .close-btn {
+            position: absolute; top: 10px; right: 15px; font-size: 2rem; 
+            cursor: pointer; color: white; z-index: 10; transition: transform 0.2s;
+        }
+        .close-btn:hover { transform: scale(1.2); }
+
+        .bio-header {
+            background: var(--felt-green); 
+            background-image: url("https://www.transparenttextures.com/patterns/felt.png");
+            color: white; padding: 40px 20px 20px;
+            position: relative; border-bottom: 4px solid var(--gold);
+        }
+
+        .bio-avatar {
+            margin-bottom: 10px;
+            background: #fff; width: 100px; height: 100px;
+            margin: 0 auto 15px; border-radius: 50%; 
+            display: flex; align-items: center; justify-content: center;
+            border: 4px solid var(--gold); 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            overflow: hidden; /* Ensures photo stays circular */
+            font-size: 2.5rem; font-weight: bold; color: var(--felt-green);
+            text-transform: uppercase;
+        }
+
+        .bio-avatar img {
+            width: 100%; height: 100%; 
+            object-fit: cover;
+        }
+
+        .bio-badges { display: flex; justify-content: center; gap: 10px; margin-top: 10px; }
+        .badge-idx { background: #fff; color: #1a472a; padding: 4px 12px; border-radius: 20px; font-weight: bold; font-size: 0.9rem; border: 1px solid var(--gold); }
+        .badge-tee { background: var(--gold); color: #000; padding: 4px 12px; border-radius: 20px; font-weight: bold; font-size: 0.9rem; border: 1px solid #fff; }
+
+        .bio-body {
+            padding: 30px; font-size: 1.2rem; line-height: 1.6;
+            color: #444; font-family: 'Playfair Display', serif; font-style: italic;
+            min-height: 100px; display: flex; align-items: center; justify-content: center;
+        }
+
+        .bio-footer {
+            background: #eee; color: #888; font-size: 0.8rem; padding: 10px;
+            text-transform: uppercase; letter-spacing: 1px;
+        }
 
         /* --- INFO SECTIONS --- */
         .letter-section {
@@ -340,10 +410,10 @@
         /* --- TEAM LOGO SPECIFIC STYLES --- */
         .team-logo {
             width: 100%;
-            height: 250px;          /* Fixed height for uniformity */
-            object-fit: contain;    /* Ensures the whole logo is visible */
-            padding: 15px;          /* White space breathing room */
-            background-color: #fff; /* White background to make logos pop */
+            height: 250px;          
+            object-fit: contain;    
+            padding: 15px;          
+            background-color: #fff; 
             border-bottom: 2px solid var(--gold);
         }
 
@@ -474,6 +544,29 @@
             <p style="color: #555;">Team Draft & Briefing at <strong>House of Carts</strong></p>
             
             <button class="modal-btn" onclick="closeModal()">I ACKNOWLEDGE</button>
+        </div>
+    </div>
+
+    <div id="bioModal" class="modal-overlay" onclick="closeBio()">
+        <div class="modal-content bio-card" onclick="event.stopPropagation()">
+            <span class="close-btn" onclick="closeBio()">&times;</span>
+            
+            <div class="bio-header">
+                <div class="bio-avatar" id="bioAvatar">⛳</div>
+                <h2 id="bioName" style="margin-bottom: 5px; font-size: 1.8rem;">PLAYER NAME</h2>
+                <div class="bio-badges">
+                    <span id="bioIndex" class="badge-idx">Index: -</span>
+                    <span id="bioTees" class="badge-tee">Tees: -</span>
+                </div>
+            </div>
+
+            <div class="bio-body">
+                <p id="bioText">Loading bio...</p>
+            </div>
+            
+            <div class="bio-footer">
+                2026 Roster
+            </div>
         </div>
     </div>
 
@@ -887,7 +980,7 @@
                 <br>
                 <br>
                 <p style="font-size: 0.9rem; color: #666;">
-                    &copy; 2026 All Rights Reserved | RanchGolfTrips.com
+                    © 2026 All Rights Reserved | RanchGolfTrips.com
                 </p>
             </div>
         </footer>
@@ -903,20 +996,15 @@
                 const elementPosition = element.getBoundingClientRect().top;
                 const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
                 
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: "smooth"
-                });
+                window.scrollTo({ top: offsetPosition, behavior: "smooth" });
             }
         }
 
         // --- COUNTDOWN TIMER ---
         var countDownDate = new Date("Mar 22, 2026 12:00:00").getTime();
-
         var x = setInterval(function() {
             var now = new Date().getTime();
             var distance = countDownDate - now;
-
             var days = Math.floor(distance / (1000 * 60 * 60 * 24));
             var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
@@ -938,8 +1026,7 @@
             setTimeout(function() {
                 document.getElementById('partyModal').style.display = 'flex';
             }, 1000); 
-            // Load the roster immediately
-            loadRoster();
+            loadRoster(); // Load the roster immediately
         };
 
         function closeModal() {
@@ -958,42 +1045,81 @@
                 const rows = parseCSV(text);
                 
                 const grid = document.getElementById('roster-grid');
-                grid.innerHTML = ''; // Clear loading message
+                grid.innerHTML = ''; 
 
                 // Loop through rows (Skip header row 0)
-                // Col 0: Name, Col 2: Handicap (now displayed as Index), Col 3: Tees
                 for (let i = 1; i < rows.length; i++) {
                     const row = rows[i];
                     if (row.length < 1) continue;
                     
-                    const name = row[0] || "Unknown";
-                    const indexVal = row[2] || "-"; // Keeping col 2 but displaying as Index
-                    const tees = row[3] || "TBD";
-                    
-                    // Simple title case for readability if name is all caps
-                    const displayName = toTitleCase(name);
+                    // DATA MAPPING
+                    const p = {
+                        name: toTitleCase(row[0] || "Unknown"),
+                        index: row[2] || "-",
+                        tees: row[3] || "TBD",
+                        bio: row[4] || "No bio available.", // Column E (BIO)
+                        avatar: row[5] || ""                // Column F (Avatar Link)
+                    };
+
+                    // PREPARE AVATAR HTML (For the list view)
+                    let avatarHtml = '';
+                    if (p.avatar && p.avatar.startsWith('http')) {
+                        avatarHtml = `<img src="${p.avatar}" alt="${p.name}" class="roster-thumb">`;
+                    } else {
+                        const initials = p.name.split(" ").map((n)=>n[0]).join("").substring(0,2);
+                        avatarHtml = `<div class="roster-thumb">${initials}</div>`;
+                    }
 
                     // Create HTML elements
                     const item = document.createElement('div');
                     item.className = 'roster-item';
                     
                     item.innerHTML = `
-                        <span class="r-name">${displayName}</span>
-                        <span class="r-meta">
-                            <strong>Index:</strong> ${indexVal}  •  <strong>Tees:</strong> ${tees}
-                        </span>
+                        ${avatarHtml}
+                        <div class="roster-text">
+                            <span class="r-name">${p.name}</span>
+                            <span class="r-meta">
+                                <strong>Index:</strong> ${p.index}  •  <strong>Tees:</strong> ${p.tees}
+                            </span>
+                        </div>
                     `;
                     
+                    item.onclick = function() { openBio(p); };
                     grid.appendChild(item);
                 }
 
             } catch (error) {
                 console.error("Error fetching roster:", error);
-                document.getElementById('roster-grid').innerHTML = '<div style="color:white;">Failed to load roster. Please check connection.</div>';
+                document.getElementById('roster-grid').innerHTML = '<div style="color:white;">Failed to load roster.</div>';
             }
         }
 
-        // Helper to parse CSV (Handles quotes correctly)
+        // --- POPUP LOGIC ---
+        function openBio(player) {
+            document.getElementById('bioName').innerText = player.name;
+            document.getElementById('bioIndex').innerText = "Index: " + player.index;
+            document.getElementById('bioTees').innerText = "Tees: " + player.tees;
+            document.getElementById('bioText').innerText = `"${player.bio}"`;
+
+            const avatarEl = document.getElementById('bioAvatar');
+            
+            // CHECK: Does the player have a custom photo URL?
+            if (player.avatar && player.avatar.startsWith('http')) {
+                avatarEl.innerHTML = `<img src="${player.avatar}" alt="${player.name}">`;
+            } else {
+                // Generate Initials (e.g. "Jeff Watts" -> "JW")
+                const initials = player.name.split(" ").map((n)=>n[0]).join("").substring(0,2);
+                avatarEl.innerHTML = initials;
+            }
+            
+            document.getElementById('bioModal').style.display = 'flex';
+        }
+
+        function closeBio() {
+            document.getElementById('bioModal').style.display = 'none';
+        }
+
+        // Helper to parse CSV
         function parseCSV(text) {
             let rows = [];
             let row = [];
