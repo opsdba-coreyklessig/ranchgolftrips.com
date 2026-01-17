@@ -168,7 +168,7 @@
             left: 30px; 
             background: rgba(183, 28, 28, 0.90); 
             color: #fff;
-            padding: 10px 20px; /* Reduced vertical padding, kept width */
+            padding: 10px 20px; 
             font-family: 'Rye', serif;
             font-size: 2.2rem; 
             border: 6px dashed #fff; 
@@ -177,9 +177,9 @@
             z-index: 100;
             text-transform: uppercase;
             text-align: center;
-            line-height: 1.1; /* Tighter lines */
-            min-width: 220px; /* Force some squareness */
-            aspect-ratio: 3/2; /* Approximate square/rect feel */
+            line-height: 1.1; 
+            min-width: 220px; 
+            aspect-ratio: 3/2; 
             display: flex;
             align-items: center;
             justify-content: center;
@@ -312,27 +312,35 @@
 
         /* --- UPDATED SPECIAL ROSTER STYLES --- */
         
-        /* Previous Winner: Full gold border, Glow, Trophy Icon */
+        /* Previous Winner: Bolder Gold Border, Richer Gold Background, Big Trophy */
         .roster-item.previous-winner {
-            border: 2px solid var(--gold) !important;
-            border-left: 8px solid var(--gold) !important;
-            background: linear-gradient(135deg, #fff 80%, #fffde7 100%) !important;
-            box-shadow: 0 0 15px rgba(244, 196, 48, 0.4);
+            border: 4px solid var(--gold) !important;
+            border-left: 10px solid var(--gold) !important;
+            background: #fff9c4 !important; /* Richer Gold (Yellow 100) */
+            box-shadow: 0 0 15px rgba(244, 196, 48, 0.6);
         }
 
-        /* Commissioner: Red border, Commish Badge */
+        .trophy-icon {
+            font-size: 1.4em; /* Big trophy */
+            margin-left: 5px;
+            vertical-align: middle;
+            filter: drop-shadow(0 2px 2px rgba(0,0,0,0.2));
+        }
+
+        /* Commissioner: Red border, Spelled out badge */
         .roster-item.commissioner {
             border: 2px solid var(--red-accent) !important;
             border-left: 8px solid var(--red-accent) !important;
-            background: #fff5f5 !important;
+            background: #ffebee !important;
         }
 
         /* Commish Text Badge */
         .commish-badge {
             background: var(--red-accent); color: white;
-            font-size: 0.7rem; font-weight: bold; padding: 2px 6px;
+            font-size: 0.7rem; font-weight: bold; padding: 3px 8px;
             border-radius: 4px; margin-left: 8px; vertical-align: middle;
             text-transform: uppercase; letter-spacing: 0.5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
 
         .roster-thumb {
@@ -347,7 +355,7 @@
         }
 
         .roster-text { display: flex; flex-direction: column; }
-        .r-name { font-size: 1rem; color: #222; text-transform: uppercase; font-weight: bold; }
+        .r-name { font-size: 1rem; color: #222; text-transform: uppercase; font-weight: bold; display: flex; align-items: center;}
         .r-meta { font-size: 0.8rem; color: #555; margin-top: 2px; }
         .r-loading { color: #fff; font-size: 1.2rem; text-align: center; grid-column: 1 / -1; }
 
@@ -1272,10 +1280,10 @@
                     let badgeHtml = '';
                     if (p.commish.toLowerCase() === 'yes') {
                         item.classList.add('commissioner');
-                        badgeHtml = ' <span class="commish-badge">COMMISH</span>';
+                        badgeHtml = ' <span class="commish-badge">COMMISSIONER</span>';
                     } else if (p.winner.toLowerCase() === 'yes') {
                         item.classList.add('previous-winner');
-                        badgeHtml = ' <span title="Previous Winner">🏆</span>';
+                        badgeHtml = ' <span class="trophy-icon" title="Previous Winner">🏆</span>';
                     }
                     
                     item.innerHTML = `
