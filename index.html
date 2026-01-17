@@ -140,7 +140,7 @@
             text-align: center; 
             background: #000; 
             position: relative; 
-            line-height: 0;       
+            line-height: 0;      
             border-bottom: 5px solid var(--gold);
         }
         
@@ -587,6 +587,7 @@
                     <span onclick="scrollToId('rules')">Rules</span>
                     <span onclick="scrollToId('courses')">Courses</span>
                     <span onclick="scrollToId('lodging')">Lodging</span>
+                    <span onclick="scrollToId('suggestions')" style="color:var(--gold);">Suggestions</span>
                     <a href="https://app.squabbitgolf.com/tournament?inviteCode=TLRKNF" target="_blank" class="btn-register-nav">REGISTER APP</a>
                 </div>
             </div>
@@ -790,28 +791,15 @@
             <div class="format-box" style="background: rgba(20, 20, 20, 0.9);">
                 
                 <div class="format-item">
-                    <h3 style="color: var(--bright-green);">General Play: Preferred Lies</h3>
-                    <p style="margin-bottom: 15px; font-size: 1.1rem;">
-                        <strong>BUMPING IS IN EFFECT.</strong>
+                    <h3>General Play</h3>
+                    <p style="margin-bottom: 15px; font-size: 1.1rem; color: var(--gold);">
+                        <strong>PLAY IT DOWN:</strong> No Lift, Clean, and Place. Play the ball as it lies unless otherwise specified by the committee due to course conditions.
                     </p>
-                    <p style="margin-bottom: 10px;">Players are permitted to bump the ball <strong>less than one grip length</strong> with the clubhead.</p>
-                    
-                    <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 5px; margin: 15px 0;">
-                        <span class="format-sub" style="color: var(--red-accent);">RESTRICTIONS:</span>
-                        <ul style="list-style: none; margin-left: 5px;">
-                            <li style="margin-bottom: 8px;">❌ You <strong>cannot improve your lie</strong> (e.g., you cannot bump the ball from the rough into the fairway).</li>
-                            <li style="margin-bottom: 8px;">❌ You <strong>cannot bump the ball</strong> if it is in a hazard or penalty area.</li>
-                        </ul>
-                    </div>
                 </div>
 
                 <div class="format-item">
                     <h3>Day 1 & 2: Team Match Play</h3>
                     <p>Standard Match Play rules apply. Gimmies are allowed and encouraged to maintain pace of play.</p>
-                    
-                    <p style="margin-top: 15px; color: var(--gold); border-left: 3px solid var(--gold); padding-left: 10px;">
-                        <strong>Scoring Requirement:</strong> Players must maintain their full <strong>Gross/Net scores</strong> for all 18 holes. If a match is closed out early (e.g., 3&2), players <strong>MUST continue to play</strong> the remaining holes and record their scores.
-                    </p>
                 </div>
 
                 <div class="format-item">
@@ -843,9 +831,6 @@
                         <p style="font-style: italic; color: #fff; margin-bottom: 10px;">
                             "If a player’s ball is lost and the group agrees it is not Out of Bounds, the player may opt to treat the lost ball as an <strong>Unplayable Lie</strong> rather than taking Stroke and Distance."
                         </p>
-                        <p style="color: var(--gold); font-weight: bold; margin-bottom: 10px;">
-                            ("Unplayable" meaning you can't find the damn ball so you can't play it!)
-                        </p>
                         <ul style="list-style: none; margin-left: 10px;">
                             <li style="margin-bottom: 8px;"><strong>Agreement:</strong> The group must agree on the estimated vicinity where the ball was lost.</li>
                             <li style="margin-bottom: 8px; color: var(--red-accent); font-size: 1.2rem;"><strong>Penalty:</strong> One (1) Stroke.</li>
@@ -875,7 +860,7 @@
                         <p><strong>Format:</strong> 2-Man Scramble / Alt Shot</p>
                         
                         <div style="margin-top: 15px; border-top: 1px solid #eee; padding-top: 10px;">
-                            <iframe src="https://www.meteoblue.com/en/weather/widget/daily?geoloc=detect&lat=32.5160&lon=-93.7321&days=4&tempunit=FAHRENHEIT&windunit=MILE_PER_HOUR&precipunit=INCH&coloured=coloured&pictoicon=1&maxtemp=1&mintemp=1&windspeed=1&windgust=0&winddirection=0&uv=0&humidity=0&precipitation=0&precipitationprobability=0&spot=0&pressure=0&layout=dark"  frameborder="0" scrolling="NO" allowtransparency="true" sandbox="allow-same-origin allow-scripts allow-popups allow-popups-to-escape-sandbox" style="width: 100%; height: 250px"></iframe>
+                            <a class="weatherwidget-io" href="https://forecast7.com/en/32d52n93d73/bossier-city/" data-label_1="BOSSIER CITY" data-label_2="WEATHER" data-theme="original" data-units="us" >BOSSIER CITY WEATHER</a>
                         </div>
                     </div>
                 </div>
@@ -891,7 +876,7 @@
                         <p><strong>Format:</strong> 2-Man Best Ball</p>
 
                         <div style="margin-top: 15px; border-top: 1px solid #eee; padding-top: 10px;">
-                             <iframe src="https://www.meteoblue.com/en/weather/widget/daily?geoloc=detect&lat=31.5694&lon=-93.4772&days=4&tempunit=FAHRENHEIT&windunit=MILE_PER_HOUR&precipunit=INCH&coloured=coloured&pictoicon=1&maxtemp=1&mintemp=1&windspeed=1&windgust=0&winddirection=0&uv=0&humidity=0&precipitation=0&precipitationprobability=0&spot=0&pressure=0&layout=dark"  frameborder="0" scrolling="NO" allowtransparency="true" sandbox="allow-same-origin allow-scripts allow-popups allow-popups-to-escape-sandbox" style="width: 100%; height: 250px"></iframe>
+                            <a class="weatherwidget-io" href="https://forecast7.com/en/31d57n93d48/many/" data-label_1="MANY, LA" data-label_2="WEATHER" data-theme="original" data-units="us" >MANY, LA WEATHER</a>
                         </div>
                     </div>
                 </div>
@@ -911,7 +896,7 @@
                         </p>
 
                         <div style="margin-top: 15px; border-top: 1px solid #eee; padding-top: 10px;">
-                             <iframe src="https://www.meteoblue.com/en/weather/widget/daily?geoloc=detect&lat=32.5376&lon=-94.9438&days=4&tempunit=FAHRENHEIT&windunit=MILE_PER_HOUR&precipunit=INCH&coloured=coloured&pictoicon=1&maxtemp=1&mintemp=1&windspeed=1&windgust=0&winddirection=0&uv=0&humidity=0&precipitation=0&precipitationprobability=0&spot=0&pressure=0&layout=dark"  frameborder="0" scrolling="NO" allowtransparency="true" sandbox="allow-same-origin allow-scripts allow-popups allow-popups-to-escape-sandbox" style="width: 100%; height: 250px"></iframe>
+                            <a class="weatherwidget-io" href="https://forecast7.com/en/32d54n94d94/gladewater/" data-label_1="GLADEWATER" data-label_2="WEATHER" data-theme="original" data-units="us" >GLADEWATER WEATHER</a>
                         </div>
                     </div>
                 </div>
@@ -1076,6 +1061,53 @@
             </div>
         </div>
 
+        <div class="container section-padding" id="suggestions">
+          <h2 class="section-title">💡 Suggestions for the Next Tournament 💡</h2>
+
+          <div class="format-box" style="max-width: 900px; margin: 0 auto;">
+            <p style="font-size: 1.1rem; margin-bottom: 15px;">
+              Have an idea that would improve the next trip? Course picks, formats, side games, trophies, rules, chaos—submit it here.
+              <span style="color:#ccc; font-size:0.95rem;">Anonymous is fine.</span>
+            </p>
+
+            <div style="display:flex; flex-wrap:wrap; gap:10px; margin: 15px 0 20px;">
+              <button class="modal-btn" style="background: var(--gold); color:#000;" type="button"
+                onclick="prefillSuggestion('Format idea: ')">Format Idea</button>
+
+              <button class="modal-btn" style="background: var(--gold); color:#000;" type="button"
+                onclick="prefillSuggestion('Course / location idea: ')">Course / Location</button>
+
+              <button class="modal-btn" style="background: var(--gold); color:#000;" type="button"
+                onclick="prefillSuggestion('Side game / betting idea: ')">Side Games</button>
+
+              <button class="modal-btn" style="background: var(--gold); color:#000;" type="button"
+                onclick="prefillSuggestion('Prize / trophy / punishment idea: ')">Prizes / Punishments</button>
+
+              <button class="modal-btn" style="background: #444;" type="button"
+                onclick="prefillSuggestion('Bad idea but hear me out: ')">Bad Idea</button>
+            </div>
+
+            <label for="suggestionText" style="display:block; margin-bottom:8px; font-weight:bold; color:#fff;">
+              Your suggestion:
+            </label>
+            <textarea id="suggestionText" rows="5"
+              style="width:100%; padding:12px; border-radius:8px; border:2px solid var(--gold); font-size:1rem;"></textarea>
+
+            <div style="display:flex; flex-wrap:wrap; align-items:center; gap:12px; margin-top:15px;">
+              <button class="modal-btn" type="button" onclick="submitSuggestion()">
+                SUBMIT
+              </button>
+
+              <span style="color:#ccc; font-size:0.95rem;" id="suggestionStatus"></span>
+            </div>
+
+            <p style="margin-top: 18px; color:#aaa; font-size:0.9rem;">
+              Prefer not to type? Use the form directly:
+              <a href="YOUR_GOOGLE_FORM_LINK_HERE" target="_blank" style="color: var(--gold); font-weight:bold;">Open Suggestions Form</a>
+            </p>
+          </div>
+        </div>
+
         <footer>
             <div class="container">
                 <p><strong>RR Invitational Committee</strong></p>
@@ -1096,6 +1128,10 @@
     </div>
 
     <script>
+        !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
+    </script>
+
+    <script>
         // --- SCROLL FUNCTION ---
         function scrollToId(id) {
             var element = document.getElementById(id);
@@ -1106,6 +1142,26 @@
                 
                 window.scrollTo({ top: offsetPosition, behavior: "smooth" });
             }
+        }
+
+        // --- SUGGESTIONS LOGIC ---
+        function prefillSuggestion(text) {
+            const area = document.getElementById('suggestionText');
+            area.value = text + area.value;
+            area.focus();
+        }
+
+        function submitSuggestion() {
+            const text = document.getElementById('suggestionText').value;
+            if(!text) { alert("Please type a suggestion first!"); return; }
+            
+            // Logic: Redirect to Google Form
+            document.getElementById('suggestionStatus').innerText = "Redirecting to form...";
+            setTimeout(() => {
+                // REPLACE THIS LINK WITH YOUR ACTUAL GOOGLE FORM LINK
+                window.open("YOUR_GOOGLE_FORM_LINK_HERE", "_blank");
+                document.getElementById('suggestionStatus').innerText = "";
+            }, 1000);
         }
 
         // --- COUNTDOWN TIMER ---
@@ -1204,7 +1260,7 @@
                         <div class="roster-text">
                             <span class="r-name">${p.name}</span>
                             <span class="r-meta">
-                                <strong>Index:</strong> ${p.index}  •  <strong>Tees:</strong> ${p.tees}
+                                <strong>Index:</strong> ${p.index}  •  <strong>Tees:</strong> ${p.tees}
                             </span>
                         </div>
                     `;
