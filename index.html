@@ -504,6 +504,44 @@
         .committee-list { list-style: none; padding: 0; margin-top: 10px; }
         .committee-list li { display: inline-block; margin: 0 10px; color: #ddd; }
 
+        /* --- GOPHER STYLE --- */
+        .gopher-icon {
+            position: absolute;
+            top: -85px;
+            right: 18px;
+            width: 210px;
+            height: auto;
+            z-index: 20;
+            filter: drop-shadow(0 10px 16px rgba(0,0,0,0.55));
+            transform-origin: 80% 80%;
+            transition: transform 0.25s ease, filter 0.25s ease;
+        }
+        .gopher-icon:hover {
+            transform: rotate(4deg) scale(1.05);
+            filter: drop-shadow(0 14px 22px rgba(0,0,0,0.7));
+        }
+
+        .suggestions-box {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(20, 20, 20, 0.95);
+            position: relative;
+            overflow: visible;
+            padding-top: 70px;
+        }
+
+        .suggestion-pill {
+            background: var(--gold) !important;
+            color: #000 !important;
+            font-size: 0.9rem !important;
+            padding: 10px 15px !important;
+        }
+
+        .suggestion-pill.bad-idea {
+            background: #444 !important;
+            color: #fff !important;
+        }
+
         /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
             .nav-inner { flex-direction: column; gap: 10px; }
@@ -518,6 +556,15 @@
             .team-grid { grid-template-columns: 1fr; }
             .lb-table th, .lb-table td { padding: 10px 5px; font-size: 0.9rem; }
             .roster-grid { grid-template-columns: 1fr 1fr; }
+
+            .suggestions-box { padding-top: 20px; }
+            .gopher-icon {
+                position: relative;
+                top: 0; right: 0;
+                display: block;
+                margin: 0 auto 10px auto;
+                width: 180px;
+            }
         }
     </style>
 </head>
@@ -791,15 +838,28 @@
             <div class="format-box" style="background: rgba(20, 20, 20, 0.9);">
                 
                 <div class="format-item">
-                    <h3>General Play</h3>
-                    <p style="margin-bottom: 15px; font-size: 1.1rem; color: var(--gold);">
-                        <strong>PLAY IT DOWN:</strong> No Lift, Clean, and Place. Play the ball as it lies unless otherwise specified by the committee due to course conditions.
+                    <h3 style="color: var(--bright-green);">General Play: Preferred Lies</h3>
+                    <p style="margin-bottom: 15px; font-size: 1.1rem;">
+                        <strong>BUMPING IS IN EFFECT.</strong>
                     </p>
+                    <p style="margin-bottom: 10px;">Players are permitted to bump the ball <strong>less than one grip length</strong> with the clubhead.</p>
+                    
+                    <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 5px; margin: 15px 0;">
+                        <span class="format-sub" style="color: var(--red-accent);">RESTRICTIONS:</span>
+                        <ul style="list-style: none; margin-left: 5px;">
+                            <li style="margin-bottom: 8px;">❌ You <strong>cannot improve your lie</strong> (e.g., you cannot bump the ball from the rough into the fairway).</li>
+                            <li style="margin-bottom: 8px;">❌ You <strong>cannot bump the ball</strong> if it is in a hazard or penalty area.</li>
+                        </ul>
+                    </div>
                 </div>
 
                 <div class="format-item">
                     <h3>Day 1 & 2: Team Match Play</h3>
                     <p>Standard Match Play rules apply. Gimmies are allowed and encouraged to maintain pace of play.</p>
+                    
+                    <p style="margin-top: 15px; color: var(--gold); border-left: 3px solid var(--gold); padding-left: 10px;">
+                        <strong>Scoring Requirement:</strong> Players must maintain their full <strong>Gross/Net scores</strong> for all 18 holes. If a match is closed out early (e.g., 3&2), players <strong>MUST continue to play</strong> the remaining holes and record their scores.
+                    </p>
                 </div>
 
                 <div class="format-item">
@@ -830,6 +890,9 @@
                     <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 5px; margin: 15px 0;">
                         <p style="font-style: italic; color: #fff; margin-bottom: 10px;">
                             "If a player’s ball is lost and the group agrees it is not Out of Bounds, the player may opt to treat the lost ball as an <strong>Unplayable Lie</strong> rather than taking Stroke and Distance."
+                        </p>
+                        <p style="color: var(--gold); font-weight: bold; margin-bottom: 10px;">
+                            ("Unplayable" meaning you can't find the damn ball so you can't play it!)
                         </p>
                         <ul style="list-style: none; margin-left: 10px;">
                             <li style="margin-bottom: 8px;"><strong>Agreement:</strong> The group must agree on the estimated vicinity where the ball was lost.</li>
@@ -1064,47 +1127,50 @@
         <div class="container section-padding" id="suggestions">
           <h2 class="section-title">💡 Suggestions for the Next Tournament 💡</h2>
 
-          <div class="format-box" style="max-width: 900px; margin: 0 auto;">
-            <p style="font-size: 1.1rem; margin-bottom: 15px;">
-              Have an idea that would improve the next trip? Course picks, formats, side games, trophies, rules, chaos—submit it here.
-              <span style="color:#ccc; font-size:0.95rem;">Anonymous is fine.</span>
-            </p>
+          <div class="format-box" style="max-width: 900px; margin: 0 auto; background: rgba(20, 20, 20, 0.95); position:relative;">
+            
+            <img src="Gopher-Listening.png" alt="Listening Gopher" class="gopher-icon">
 
-            <div style="display:flex; flex-wrap:wrap; gap:10px; margin: 15px 0 20px;">
-              <button class="modal-btn" style="background: var(--gold); color:#000;" type="button"
-                onclick="prefillSuggestion('Format idea: ')">Format Idea</button>
+            <div id="suggestionInputArea">
+                <p style="font-size: 1.1rem; margin-bottom: 15px;">
+                  Have an idea that would improve the next trip? Course picks, formats, side games, trophies, rules, chaos—submit it here.
+                  <span style="color:#ccc; font-size:0.95rem;">Anonymous is fine.</span>
+                </p>
 
-              <button class="modal-btn" style="background: var(--gold); color:#000;" type="button"
-                onclick="prefillSuggestion('Course / location idea: ')">Course / Location</button>
+                <div style="display:flex; flex-wrap:wrap; gap:10px; margin: 15px 0 20px;">
+                  <button class="modal-btn" style="background: var(--gold); color:#000; font-size: 0.9rem; padding: 10px 15px;" type="button"
+                    onclick="prefillSuggestion('Format idea: ')">Format Idea</button>
 
-              <button class="modal-btn" style="background: var(--gold); color:#000;" type="button"
-                onclick="prefillSuggestion('Side game / betting idea: ')">Side Games</button>
+                  <button class="modal-btn" style="background: var(--gold); color:#000; font-size: 0.9rem; padding: 10px 15px;" type="button"
+                    onclick="prefillSuggestion('Course / location idea: ')">Course / Location</button>
 
-              <button class="modal-btn" style="background: var(--gold); color:#000;" type="button"
-                onclick="prefillSuggestion('Prize / trophy / punishment idea: ')">Prizes / Punishments</button>
+                  <button class="modal-btn" style="background: var(--gold); color:#000; font-size: 0.9rem; padding: 10px 15px;" type="button"
+                    onclick="prefillSuggestion('Side game / betting idea: ')">Side Games</button>
 
-              <button class="modal-btn" style="background: #444;" type="button"
-                onclick="prefillSuggestion('Bad idea but hear me out: ')">Bad Idea</button>
+                  <button class="modal-btn" style="background: #444; font-size: 0.9rem; padding: 10px 15px;" type="button"
+                    onclick="prefillSuggestion('Bad idea but hear me out: ')">Bad Idea</button>
+                </div>
+
+                <label for="suggestionText" style="display:block; margin-bottom:8px; font-weight:bold; color:#fff;">
+                  Your suggestion:
+                </label>
+                <textarea id="suggestionText" rows="5" placeholder="Type your brilliant idea here..."
+                  style="width:100%; padding:12px; border-radius:8px; border:2px solid var(--gold); font-size:1rem; font-family: 'Roboto', sans-serif;"></textarea>
+
+                <div style="display:flex; flex-wrap:wrap; align-items:center; gap:12px; margin-top:15px;">
+                  <button class="modal-btn" type="button" onclick="submitSuggestion()">
+                    SUBMIT
+                  </button>
+                </div>
             </div>
 
-            <label for="suggestionText" style="display:block; margin-bottom:8px; font-weight:bold; color:#fff;">
-              Your suggestion:
-            </label>
-            <textarea id="suggestionText" rows="5"
-              style="width:100%; padding:12px; border-radius:8px; border:2px solid var(--gold); font-size:1rem;"></textarea>
-
-            <div style="display:flex; flex-wrap:wrap; align-items:center; gap:12px; margin-top:15px;">
-              <button class="modal-btn" type="button" onclick="submitSuggestion()">
-                SUBMIT
-              </button>
-
-              <span style="color:#ccc; font-size:0.95rem;" id="suggestionStatus"></span>
+            <div id="iframeContainer" style="display:none; margin-top:20px; border-top: 2px dashed #555; padding-top:20px;">
+                <h3 style="color: var(--gold); margin-bottom: 10px;">👇 Complete Submission Below 👇</h3>
+                <p style="font-size: 0.9rem; color: #ccc; margin-bottom: 10px;">Your text has been copied to the form below. Just hit <strong>Submit</strong>.</p>
+                <iframe id="googleFormFrame" src="" width="100%" height="600" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+                <button onclick="resetSuggestion()" style="background: #444; color: #fff; border: 1px solid #666; padding: 8px 15px; margin-top: 10px; cursor:pointer; border-radius: 4px;">Close / Submit Another</button>
             </div>
 
-            <p style="margin-top: 18px; color:#aaa; font-size:0.9rem;">
-              Prefer not to type? Use the form directly:
-              <a href="YOUR_GOOGLE_FORM_LINK_HERE" target="_blank" style="color: var(--gold); font-weight:bold;">Open Suggestions Form</a>
-            </p>
           </div>
         </div>
 
@@ -1144,7 +1210,7 @@
             }
         }
 
-        // --- SUGGESTIONS LOGIC ---
+        // --- SUGGESTIONS LOGIC (EMBEDDED) ---
         function prefillSuggestion(text) {
             const area = document.getElementById('suggestionText');
             area.value = text + area.value;
@@ -1153,15 +1219,31 @@
 
         function submitSuggestion() {
             const text = document.getElementById('suggestionText').value;
-            if(!text) { alert("Please type a suggestion first!"); return; }
             
-            // Logic: Redirect to Google Form
-            document.getElementById('suggestionStatus').innerText = "Redirecting to form...";
-            setTimeout(() => {
-                // REPLACE THIS LINK WITH YOUR ACTUAL GOOGLE FORM LINK
-                window.open("YOUR_GOOGLE_FORM_LINK_HERE", "_blank");
-                document.getElementById('suggestionStatus').innerText = "";
-            }, 1000);
+            // YOUR GOOGLE FORM ID AND ENTRY ID
+            const formID = "1FAIpQLSenYPzixEsjqwnNjYzfas37wtPaUDi3YyqI_C3i1zpnLtX20A";
+            const entryID = "entry.205094115";
+
+            if(!text) { 
+                alert("Please type a suggestion first!"); 
+                return; 
+            }
+            
+            // Construct the Pre-filled URL
+            const finalURL = `https://docs.google.com/forms/d/e/${formID}/viewform?usp=pp_url&${entryID}=${encodeURIComponent(text)}&embedded=true`;
+            
+            // Set iframe src and show it
+            document.getElementById('googleFormFrame').src = finalURL;
+            document.getElementById('iframeContainer').style.display = 'block';
+            
+            // Hide the input area so it looks like a "page transition" inside the box
+            document.getElementById('suggestionInputArea').style.display = 'none';
+        }
+
+        function resetSuggestion() {
+            document.getElementById('suggestionText').value = "";
+            document.getElementById('iframeContainer').style.display = 'none';
+            document.getElementById('suggestionInputArea').style.display = 'block';
         }
 
         // --- COUNTDOWN TIMER ---
