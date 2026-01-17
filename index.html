@@ -161,24 +161,24 @@
             display: block; 
         }
 
-        /* --- SOLD OUT STAMP (LEFT SIDE) --- */
+        /* --- SOLD OUT BADGE (LEFT SIDE STAMP) --- */
         .sold-out-badge {
             position: absolute;
             top: 40px; 
             left: 30px; 
-            background: rgba(183, 28, 28, 0.95); /* Red with slight transparency */
+            background: rgba(183, 28, 28, 0.90); 
             color: #fff;
-            padding: 20px 40px;
+            padding: 15px 30px;
             font-family: 'Rye', serif;
-            font-size: 2.2rem; 
-            border: 6px dashed #fff; /* STAMP LOOK */
-            transform: rotate(-10deg); /* Tilted Stamp */
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8); 
+            font-size: 2.5rem; 
+            border: 5px dashed #fff; 
+            transform: rotate(-12deg); 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.7); 
             z-index: 100;
             text-transform: uppercase;
             letter-spacing: 2px;
-            text-shadow: 3px 3px 0 #000;
-            line-height: 1.2;
+            text-shadow: 2px 2px 0 #000;
+            white-space: nowrap;
         }
 
         /* --- COUNTDOWN TIMER --- */
@@ -599,11 +599,10 @@
             
             /* ADJUST SOLD OUT BADGE FOR MOBILE */
             .sold-out-badge {
-                font-size: 1.2rem;
-                padding: 10px 30px;
+                font-size: 1.5rem;
+                padding: 10px 20px;
                 top: 20px;
                 left: 10px;
-                max-width: 280px;
             }
         }
     </style>
@@ -689,22 +688,21 @@
                 position: absolute;
                 top: 40px; 
                 left: 30px; 
-                background: rgba(183, 28, 28, 0.95); 
+                background: rgba(183, 28, 28, 0.90); 
                 color: #fff;
-                padding: 20px 40px;
+                padding: 15px 30px;
                 font-family: 'Rye', serif;
-                font-size: 2.2rem; 
-                border: 6px dashed #fff; 
-                transform: rotate(-10deg); 
-                box-shadow: 0 10px 30px rgba(0,0,0,0.8); 
+                font-size: 2.5rem; 
+                border: 5px dashed #fff; 
+                transform: rotate(-12deg); 
+                box-shadow: 0 10px 20px rgba(0,0,0,0.7); 
                 z-index: 100;
                 text-transform: uppercase;
                 letter-spacing: 2px;
-                text-shadow: 3px 3px 0 #000;
-                line-height: 1.2;
-                max-width: 500px;
+                text-shadow: 2px 2px 0 #000;
+                white-space: nowrap;
             ">
-                REGISTRATION CLOSED!<br>SOLD OUT!
+                SOLD OUT!
             </div>
             
             <img src="Banner-Final.png" 
