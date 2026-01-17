@@ -40,14 +40,18 @@
 
         .modal-content {
             background: var(--card-white); border: 5px solid var(--gold);
-            padding: 30px; max-width: 500px; width: 90%; text-align: center;
+            padding: 0 0 30px 0; 
+            max-width: 500px; width: 90%; text-align: center;
             border-radius: 10px; box-shadow: 0 0 50px rgba(244, 196, 48, 0.5);
             animation: dropIn 0.5s ease-out; position: relative;
             max-height: 90vh; overflow-y: auto; 
+            overflow-x: hidden;
         }
 
-        .modal-content::before { content: '♠'; position: absolute; top: 10px; left: 10px; font-size: 2rem; color: #ccc; }
-        .modal-content::after { content: '♠'; position: absolute; bottom: 10px; right: 10px; font-size: 2rem; color: #ccc; }
+        .modal-content::before { content: '♠'; position: absolute; top: 10px; left: 10px; font-size: 2rem; color: rgba(255,255,255,0.8); z-index: 5; }
+        .modal-content::after { content: '♠'; position: absolute; top: 10px; right: 10px; font-size: 2rem; color: rgba(255,255,255,0.8); z-index: 5; }
+
+        .modal-inner-padding { padding: 0 30px; }
 
         .modal-alert-box {
             background: #ffebee; border: 2px dashed var(--red-accent);
@@ -67,13 +71,10 @@
         }
         .modal-btn:hover { background: #d32f2f; box-shadow: 0 0 15px var(--red-accent); }
 
-        /* GOLPHER ALERT ICON STYLE - UPDATED SIZE */
-        .gopher-alert-icon {
-            width: 220px; /* INCREASED SIZE */
-            height: auto;
-            display: block;
-            margin: 0 auto 20px auto; /* Increased bottom margin */
-            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+        /* Banner Style for Golpher Alert */
+        .gopher-alert-banner {
+            width: 100%; height: auto; display: block;
+            margin-bottom: 20px; border-bottom: 4px solid var(--gold);
         }
 
         @keyframes dropIn {
@@ -151,12 +152,32 @@
             position: relative; 
             line-height: 0;      
             border-bottom: 5px solid var(--gold);
+            overflow: hidden; /* For the Sold Out ribbon */
         }
         
         .banner-img { 
             width: 100%; 
             height: auto; 
             display: block; 
+        }
+
+        /* --- SOLD OUT BADGE --- */
+        .sold-out-badge {
+            position: absolute;
+            top: 30px;
+            right: -50px;
+            background: var(--red-accent);
+            color: #fff;
+            padding: 10px 60px;
+            font-family: 'Rye', serif;
+            font-size: 1.5rem;
+            border: 4px solid #fff;
+            transform: rotate(45deg);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.7);
+            z-index: 100;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 0 #000;
         }
 
         /* --- COUNTDOWN TIMER --- */
@@ -581,27 +602,29 @@
 
     <div id="partyModal" class="modal-overlay">
         <div class="modal-content">
-            <img src="GolpherAlert.png" alt="Golpher Alert" class="gopher-alert-icon">
+            <img src="GolpherAlert.png" alt="Golpher Alert" class="gopher-alert-banner">
             
-            <div class="modal-alert-box">
-                <h3 style="color: var(--red-accent); font-size: 1.3rem;">$200 PAYMENT DUE</h3>
-                <p style="font-weight: bold; margin-top: 5px;">FEBRUARY 15th</p>
-                <p style="font-size: 0.9rem;">Cash Preferred. Checks to Tim or Jeff.</p>
+            <div class="modal-inner-padding">
+                <div class="modal-alert-box">
+                    <h3 style="color: var(--red-accent); font-size: 1.3rem;">$200 PAYMENT DUE</h3>
+                    <p style="font-weight: bold; margin-top: 5px;">FEBRUARY 15th</p>
+                    <p style="font-size: 0.9rem;">Cash Preferred. Checks to Tim or Jeff.</p>
+                </div>
+
+                <div class="modal-good-news">
+                     <h3 style="color: var(--bright-green); font-size: 1.3rem;">LODGING NEWS</h3>
+                     <p style="font-weight: bold; color: #1a472a;">BALLY'S IS 100% COMPED!</p>
+                     <p style="font-size: 0.9rem;">Both nights (Sun & Mon) are free.</p>
+                </div>
+
+                <hr style="margin: 15px 0; border: 0; border-top: 1px solid #ddd;">
+
+                <h3 style="color: var(--felt-green); font-size: 1.4rem;">Pre-Tournament Party</h3>
+                <p style="font-size: 1.1rem; margin: 10px 0; font-weight: bold;">Monday, March 16th @ 5:00 PM</p>
+                <p style="color: #555;">Team Draft & Briefing at <strong>House of Carts</strong></p>
+                
+                <button class="modal-btn" onclick="closeModal()">CLOSE</button>
             </div>
-
-            <div class="modal-good-news">
-                 <h3 style="color: var(--bright-green); font-size: 1.3rem;">LODGING NEWS</h3>
-                 <p style="font-weight: bold; color: #1a472a;">BALLY'S IS 100% COMPED!</p>
-                 <p style="font-size: 0.9rem;">Both nights (Sun & Mon) are free.</p>
-            </div>
-
-            <hr style="margin: 15px 0; border: 0; border-top: 1px solid #ddd;">
-
-            <h3 style="color: var(--felt-green); font-size: 1.4rem;">Pre-Tournament Party</h3>
-            <p style="font-size: 1.1rem; margin: 10px 0; font-weight: bold;">Monday, March 16th @ 5:00 PM</p>
-            <p style="color: #555;">Team Draft & Briefing at <strong>House of Carts</strong></p>
-            
-            <button class="modal-btn" onclick="closeModal()">CLOSE</button>
         </div>
     </div>
 
@@ -652,6 +675,8 @@
         </div>
 
         <div class="hero-section">
+            <div class="sold-out-badge">SOLD OUT</div>
+            
             <img src="Banner-Final.png" 
                  alt="2026 Robson Ranch Invitational Banner" 
                  class="banner-img"
@@ -754,7 +779,7 @@
                     <h2 style="color: var(--felt-green);">2026 Robson Ranch Invitational</h2>
                     <h3 style="color: #666; margin-bottom: 20px;">Three Day Tournament • March 22-25, 2026</h3>
                     
-                    <p><strong>Ryder Cup Format:</strong> 4 Teams (Approx 40 players)</p>
+                    <p><strong>RYDER CUP FORMAT:</strong> 4 Teams</p>
                     <p>Winning Team Awards • Low Gross & Low Net Champion Awards • Daily Tee Gifts</p>
 
                     <div class="payment-box">
