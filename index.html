@@ -161,7 +161,7 @@
             display: block; 
         }
 
-        /* --- SOLD OUT BADGE (UPDATED: Compact Stamp) --- */
+        /* --- SOLD OUT BADGE --- */
         .sold-out-badge {
             position: absolute;
             top: 40px; 
@@ -178,7 +178,7 @@
             text-transform: uppercase;
             text-align: center;
             line-height: 1.1; 
-            min-width: 160px; /* REDUCED WIDTH to fit tighter */
+            min-width: 160px; /* REDUCED WIDTH */
             aspect-ratio: 3/2; 
             display: flex;
             align-items: center;
@@ -310,24 +310,24 @@
             background-color: #f9f9f9;
         }
 
-        /* --- UPDATED SPECIAL ROSTER STYLES --- */
+        /* --- SPECIAL ROSTER STYLES --- */
         
-        /* Previous Winner: Bolder Gold Border, Richer Gold Background, Big Trophy */
+        /* Previous Winner */
         .roster-item.previous-winner {
             border: 4px solid var(--gold) !important;
             border-left: 10px solid var(--gold) !important;
-            background: #fff9c4 !important; /* Richer Gold (Yellow 100) */
+            background: #fff9c4 !important; 
             box-shadow: 0 0 15px rgba(244, 196, 48, 0.6);
         }
 
         .trophy-icon {
-            font-size: 1.4em; /* Big trophy */
+            font-size: 1.4em;
             margin-left: 5px;
             vertical-align: middle;
             filter: drop-shadow(0 2px 2px rgba(0,0,0,0.2));
         }
 
-        /* Commissioner: Red border, Spelled out badge */
+        /* Commissioner */
         .roster-item.commissioner {
             border: 2px solid var(--red-accent) !important;
             border-left: 8px solid var(--red-accent) !important;
@@ -1073,7 +1073,7 @@
             <div id="suggestionInputArea">
                 <p style="font-size: 1.1rem; margin-bottom: 15px;">
                   Have an idea that would improve the next trip? Course picks, formats, side games, trophies, rules, chaos—submit it here.
-                  <span style="color:#ccc; font-size:0.95rem;">Anonymous is fine.</span>
+                  <span style="color:#ccc; font-size:0.95rem;">Submissions are completely anonymous unless you type your name in the box.</span>
                 </p>
 
                 <div style="display:flex; flex-wrap:wrap; gap:10px; margin: 15px 0 20px;">
@@ -1090,24 +1090,33 @@
                     onclick="prefillSuggestion('Bad idea but hear me out: ')">Bad Idea</button>
                 </div>
 
-                <label for="suggestionText" style="display:block; margin-bottom:8px; font-weight:bold; color:#fff;">
-                  Your suggestion:
-                </label>
-                <textarea id="suggestionText" rows="5" placeholder="Type your brilliant idea here..."
-                  style="width:100%; padding:12px; border-radius:8px; border:2px solid var(--gold); font-size:1rem; font-family: 'Roboto', sans-serif;"></textarea>
+                <form action="https://docs.google.com/forms/d/e/1FAIpQLSenYPzixEsjqwnNjYzfas37wtPaUDi3YyqI_C3i1zpnLtX20A/formResponse" 
+                      method="POST" 
+                      target="hidden_iframe" 
+                      id="gopherForm"
+                      onsubmit="handleFormSubmit()">
+                    
+                    <label for="suggestionText" style="display:block; margin-bottom:8px; font-weight:bold; color:#fff;">
+                      Your suggestion:
+                    </label>
+                    
+                    <textarea id="suggestionText" name="entry.205094115" rows="5" placeholder="Type your brilliant idea here..."
+                      style="width:100%; padding:12px; border-radius:8px; border:2px solid var(--gold); font-size:1rem; font-family: 'Roboto', sans-serif;" required></textarea>
 
-                <div style="display:flex; flex-wrap:wrap; align-items:center; gap:12px; margin-top:15px;">
-                  <button class="modal-btn" type="button" onclick="submitSuggestion()">
-                    SUBMIT
-                  </button>
-                </div>
+                    <div style="display:flex; flex-wrap:wrap; align-items:center; gap:12px; margin-top:15px;">
+                      <button class="modal-btn" type="submit">
+                        SUBMIT
+                      </button>
+                    </div>
+                </form>
             </div>
 
-            <div id="iframeContainer" style="display:none; margin-top:20px; border-top: 2px dashed #555; padding-top:20px;">
-                <h3 style="color: var(--gold); margin-bottom: 10px;">👇 Complete Submission Below 👇</h3>
-                <p style="font-size: 0.9rem; color: #ccc; margin-bottom: 10px;">Your text has been copied to the form below. Just hit <strong>Submit</strong>.</p>
-                <iframe id="googleFormFrame" src="" width="100%" height="600" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
-                <button onclick="resetSuggestion()" style="background: #444; color: #fff; border: 1px solid #666; padding: 8px 15px; margin-top: 10px; cursor:pointer; border-radius: 4px;">Close / Submit Another</button>
+            <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+
+            <div id="thankYouMessage" style="display:none; text-align:center; padding: 40px 20px;">
+                <h3 style="color: var(--gold); font-size: 2rem; margin-bottom: 20px;">✅ Message Received!</h3>
+                <p style="font-size: 1.2rem; color: #ccc;">Thanks for the feedback.</p>
+                <button class="modal-btn" style="background:#444; border:1px solid #666; margin-top:20px;" onclick="resetForm()">Send Another</button>
             </div>
 
           </div>
@@ -1145,39 +1154,26 @@
             }
         }
 
-        // --- SUGGESTIONS LOGIC (EMBEDDED) ---
+        // --- SUGGESTIONS LOGIC (SEAMLESS AJAX-LIKE) ---
         function prefillSuggestion(text) {
             const area = document.getElementById('suggestionText');
             area.value = text + area.value;
             area.focus();
         }
 
-        function submitSuggestion() {
-            const text = document.getElementById('suggestionText').value;
-            
-            // YOUR GOOGLE FORM ID AND ENTRY ID
-            const formID = "1FAIpQLSenYPzixEsjqwnNjYzfas37wtPaUDi3YyqI_C3i1zpnLtX20A";
-            const entryID = "entry.205094115";
-
-            if(!text) { 
-                alert("Please type a suggestion first!"); 
-                return; 
-            }
-            
-            // Construct the Pre-filled URL
-            const finalURL = `https://docs.google.com/forms/d/e/${formID}/viewform?usp=pp_url&${entryID}=${encodeURIComponent(text)}&embedded=true`;
-            
-            // Set iframe src and show it
-            document.getElementById('googleFormFrame').src = finalURL;
-            document.getElementById('iframeContainer').style.display = 'block';
-            
-            // Hide the input area so it looks like a "page transition" inside the box
-            document.getElementById('suggestionInputArea').style.display = 'none';
+        function handleFormSubmit() {
+            // Wait a split second to ensure the form posts to the iframe, then swap the UI
+            setTimeout(function() {
+                document.getElementById('suggestionInputArea').style.display = 'none';
+                document.getElementById('thankYouMessage').style.display = 'block';
+            }, 100);
+            // We return true so the form actually submits to the target iframe
+            return true;
         }
 
-        function resetSuggestion() {
-            document.getElementById('suggestionText').value = "";
-            document.getElementById('iframeContainer').style.display = 'none';
+        function resetForm() {
+            document.getElementById('gopherForm').reset();
+            document.getElementById('thankYouMessage').style.display = 'none';
             document.getElementById('suggestionInputArea').style.display = 'block';
         }
 
