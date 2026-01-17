@@ -161,25 +161,28 @@
             display: block; 
         }
 
-        /* --- SOLD OUT BADGE (UPDATED: BIGGER PADDING) --- */
+        /* --- SOLD OUT BADGE (UPDATED: 2 Lines & Square) --- */
         .sold-out-badge {
             position: absolute;
             top: 40px; 
             left: 30px; 
             background: rgba(183, 28, 28, 0.90); 
             color: #fff;
-            padding: 15px 60px; /* INCREASED PADDING */
+            padding: 10px 20px; /* Reduced vertical padding, kept width */
             font-family: 'Rye', serif;
-            font-size: 2.5rem; 
-            border: 5px dashed #fff; 
-            transform: rotate(-12deg); 
-            box-shadow: 0 10px 20px rgba(0,0,0,0.7); 
+            font-size: 2.2rem; 
+            border: 6px dashed #fff; 
+            transform: rotate(-8deg); 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.8); 
             z-index: 100;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 2px 2px 0 #000;
-            white-space: nowrap;
             text-align: center;
+            line-height: 1.1; /* Tighter lines */
+            min-width: 220px; /* Force some squareness */
+            aspect-ratio: 3/2; /* Approximate square/rect feel */
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         /* --- COUNTDOWN TIMER --- */
@@ -307,15 +310,29 @@
             background-color: #f9f9f9;
         }
 
-        /* NEW STYLES FOR WINNERS AND COMMISSIONER */
+        /* --- UPDATED SPECIAL ROSTER STYLES --- */
+        
+        /* Previous Winner: Full gold border, Glow, Trophy Icon */
         .roster-item.previous-winner {
-            border-left: 6px solid var(--gold) !important;
-            background: #fffbe6 !important;
+            border: 2px solid var(--gold) !important;
+            border-left: 8px solid var(--gold) !important;
+            background: linear-gradient(135deg, #fff 80%, #fffde7 100%) !important;
+            box-shadow: 0 0 15px rgba(244, 196, 48, 0.4);
         }
 
+        /* Commissioner: Red border, Commish Badge */
         .roster-item.commissioner {
-            border-left: 6px solid var(--red-accent) !important;
-            background: #ffebee !important;
+            border: 2px solid var(--red-accent) !important;
+            border-left: 8px solid var(--red-accent) !important;
+            background: #fff5f5 !important;
+        }
+
+        /* Commish Text Badge */
+        .commish-badge {
+            background: var(--red-accent); color: white;
+            font-size: 0.7rem; font-weight: bold; padding: 2px 6px;
+            border-radius: 4px; margin-left: 8px; vertical-align: middle;
+            text-transform: uppercase; letter-spacing: 0.5px;
         }
 
         .roster-thumb {
@@ -611,10 +628,11 @@
             
             /* ADJUST SOLD OUT BADGE FOR MOBILE */
             .sold-out-badge {
-                font-size: 1.5rem;
+                font-size: 1.2rem;
                 padding: 10px 20px;
                 top: 20px;
                 left: 10px;
+                min-width: auto;
             }
         }
     </style>
@@ -696,26 +714,8 @@
         </div>
 
         <div class="hero-section">
-            <div class="sold-out-badge" style="
-                position: absolute;
-                top: 40px; 
-                left: 30px; 
-                background: rgba(183, 28, 28, 0.90); 
-                color: #fff;
-                padding: 15px 60px;
-                font-family: 'Rye', serif;
-                font-size: 2.5rem; 
-                border: 5px dashed #fff; 
-                transform: rotate(-12deg); 
-                box-shadow: 0 10px 20px rgba(0,0,0,0.7); 
-                z-index: 100;
-                text-transform: uppercase;
-                letter-spacing: 2px;
-                text-shadow: 2px 2px 0 #000;
-                white-space: nowrap;
-                text-align: center;
-            ">
-                SOLD OUT!
+            <div class="sold-out-badge">
+                SOLD<br>OUT!
             </div>
             
             <img src="Banner-Final.png" 
@@ -1272,7 +1272,7 @@
                     let badgeHtml = '';
                     if (p.commish.toLowerCase() === 'yes') {
                         item.classList.add('commissioner');
-                        badgeHtml = ' <span title="Commissioner">⚖️</span>';
+                        badgeHtml = ' <span class="commish-badge">COMMISH</span>';
                     } else if (p.winner.toLowerCase() === 'yes') {
                         item.classList.add('previous-winner');
                         badgeHtml = ' <span title="Previous Winner">🏆</span>';
