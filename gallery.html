@@ -82,8 +82,19 @@
         .card-banner {
             background: var(--felt-green);
             background-image: url("https://www.transparenttextures.com/patterns/felt.png");
-            padding: 30px 20px;
+            padding: 18px 16px;
             border-bottom: 5px solid var(--gold);
+        }
+
+        /* --- NEW: Golpher banner image sizing --- */
+        .golpher-banner {
+            display: block;
+            width: 100%;
+            height: auto;              /* keeps aspect ratio correct */
+            max-width: 560px;          /* keeps it from feeling huge inside the card */
+            margin: 0 auto 12px auto;  /* centered + a little spacing before the title */
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.35);
         }
 
         .card-body {
@@ -136,6 +147,7 @@
         @media (max-width: 480px) {
             .gallery-title { font-size: 1.5rem; }
             .big-btn { font-size: 1.2rem; padding: 15px; }
+            .golpher-banner { max-width: 100%; } /* let it span naturally on small screens */
         }
     </style>
 </head>
@@ -150,7 +162,9 @@
         <div class="portal-card">
             
             <div class="card-banner">
-                <div style="font-size: 5rem;">📸</div>
+                <!-- NEW: Golpher banner image -->
+                <img src="GolpherPhotos.png" alt="Golpher Photos Banner" class="golpher-banner">
+
                 <h2 style="color:white; font-family:'Rye', serif;">The 2026 Collection</h2>
             </div>
 
