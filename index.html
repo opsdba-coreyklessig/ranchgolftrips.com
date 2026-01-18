@@ -139,13 +139,26 @@
         }
         .nav-links span:hover { color: var(--gold); }
         
-        /* Updated Button Style for Gallery Link */
+        /* Updated Button Style for Gallery Link (RED) */
         .btn-gallery-nav {
-            background: var(--gold); /* Changed to Gold for the gallery */
-            padding: 8px 15px; border-radius: 4px; border: 1px solid #d4af37;
-            color: #000 !important; text-decoration: none; margin-left: 20px; font-weight: bold; font-size: 0.9rem;
+            background: var(--red-accent); 
+            padding: 8px 15px; 
+            border-radius: 4px; 
+            border: 1px solid #ff5252;
+            color: white !important; 
+            text-decoration: none; 
+            margin-left: 20px; 
+            font-weight: bold; 
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px; /* Spacing between camera and text */
         }
-        .btn-gallery-nav:hover { background: #fff; color: #000 !important; }
+        .btn-gallery-nav:hover { 
+            background: #d32f2f; 
+            color: white !important; 
+            box-shadow: 0 0 10px rgba(255, 82, 82, 0.5);
+        }
 
         /* --- HERO & BANNER STYLES --- */
         .hero-section { 
@@ -163,14 +176,14 @@
             display: block; 
         }
 
-        /* --- SOLD OUT BADGE --- */
+        /* --- SOLD OUT BADGE (UPDATED: Compact Stamp) --- */
         .sold-out-badge {
             position: absolute;
             top: 40px; 
             left: 30px; 
             background: rgba(183, 28, 28, 0.90); 
             color: #fff;
-            padding: 5px 10px; 
+            padding: 5px 10px; /* REDUCED PADDING */
             font-family: 'Rye', serif;
             font-size: 2.2rem; 
             border: 6px dashed #fff; 
@@ -180,7 +193,7 @@
             text-transform: uppercase;
             text-align: center;
             line-height: 1.1; 
-            min-width: 160px; 
+            min-width: 160px; /* REDUCED WIDTH */
             aspect-ratio: 3/2; 
             display: flex;
             align-items: center;
@@ -714,7 +727,7 @@
                     <span onclick="scrollToId('courses')">Courses</span>
                     <span onclick="scrollToId('lodging')">Lodging</span>
                     <span onclick="scrollToId('suggestions')" style="color:var(--gold);">Suggestions</span>
-                    <a href="gallery.html" class="btn-gallery-nav">PHOTO GALLERY</a>
+                    <a href="gallery.html" class="btn-gallery-nav">📷 PHOTO GALLERY</a>
                 </div>
             </div>
         </nav>
