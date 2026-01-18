@@ -139,11 +139,13 @@
         }
         .nav-links span:hover { color: var(--gold); }
         
-        .btn-register-nav {
-            background: var(--red-accent); padding: 8px 15px; border-radius: 4px; border: 1px solid #ff5252;
-            color: white; text-decoration: none; margin-left: 20px; font-weight: bold; font-size: 0.9rem;
+        /* Updated Button Style for Gallery Link */
+        .btn-gallery-nav {
+            background: var(--gold); /* Changed to Gold for the gallery */
+            padding: 8px 15px; border-radius: 4px; border: 1px solid #d4af37;
+            color: #000 !important; text-decoration: none; margin-left: 20px; font-weight: bold; font-size: 0.9rem;
         }
-        .btn-register-nav:hover { background: #d32f2f; color: white !important; }
+        .btn-gallery-nav:hover { background: #fff; color: #000 !important; }
 
         /* --- HERO & BANNER STYLES --- */
         .hero-section { 
@@ -168,7 +170,7 @@
             left: 30px; 
             background: rgba(183, 28, 28, 0.90); 
             color: #fff;
-            padding: 5px 10px; /* REDUCED PADDING */
+            padding: 5px 10px; 
             font-family: 'Rye', serif;
             font-size: 2.2rem; 
             border: 6px dashed #fff; 
@@ -178,7 +180,7 @@
             text-transform: uppercase;
             text-align: center;
             line-height: 1.1; 
-            min-width: 160px; /* REDUCED WIDTH */
+            min-width: 160px; 
             aspect-ratio: 3/2; 
             display: flex;
             align-items: center;
@@ -712,7 +714,7 @@
                     <span onclick="scrollToId('courses')">Courses</span>
                     <span onclick="scrollToId('lodging')">Lodging</span>
                     <span onclick="scrollToId('suggestions')" style="color:var(--gold);">Suggestions</span>
-                    <a href="https://app.squabbitgolf.com/tournament?inviteCode=TLRKNF" target="_blank" class="btn-register-nav">REGISTER APP</a>
+                    <a href="gallery.html" class="btn-gallery-nav">PHOTO GALLERY</a>
                 </div>
             </div>
         </nav>
