@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Photo & Video Gallery | 2026 RR Invitational</title>
+    <title>Photo Gallery | 2026 RR Invitational</title>
     <link href="https://fonts.googleapis.com/css2?family=Rye&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         /* --- THEME VARIABLES --- */
@@ -23,17 +23,17 @@
             font-family: 'Roboto', sans-serif;
             color: var(--text-dark);
             background-image: url("https://www.transparenttextures.com/patterns/wood-pattern.png");
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
-        /* --- HEADER & NAV --- */
+        /* --- HEADER --- */
         .gallery-header {
             background: #111;
             border-bottom: 4px solid var(--gold);
             padding: 20px;
             text-align: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
             box-shadow: 0 5px 20px rgba(0,0,0,0.5);
         }
 
@@ -59,226 +59,121 @@
         }
         .btn-home:hover { background: var(--gold); color: #000; }
 
-        /* --- GALLERY GRID --- */
-        .gallery-container {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 20px;
-            column-count: 3;
-            column-gap: 20px;
-        }
-
-        .gallery-item {
-            break-inside: avoid;
-            margin-bottom: 20px;
-            background: #fff;
-            padding: 10px;
-            border: 2px solid #ccc;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            border-radius: 2px;
-            transition: transform 0.2s;
-            cursor: pointer;
-            position: relative; /* For play icon positioning */
-        }
-
-        .gallery-item:hover {
-            transform: scale(1.02);
-            border-color: var(--gold);
-            z-index: 10;
-        }
-
-        .gallery-item img, .gallery-item video {
-            width: 100%;
-            height: auto;
-            display: block;
-            border: 1px solid #eee;
-        }
-
-        /* Video Overlay Icon */
-        .play-icon {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 3rem;
-            color: rgba(255,255,255,0.8);
-            text-shadow: 0 2px 5px rgba(0,0,0,0.8);
-            pointer-events: none; /* Let clicks pass through to the div */
-        }
-
-        /* --- LIGHTBOX (MODAL) --- */
-        .lightbox {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.95);
-            justify-content: center;
+        /* --- MAIN CONTENT --- */
+        .main-content {
+            flex: 1;
+            display: flex;
             align-items: center;
-            flex-direction: column;
+            justify-content: center;
+            padding: 20px;
         }
 
-        /* Common style for both Image and Video in Lightbox */
-        .lightbox-content {
-            max-width: 90%;
-            max-height: 80vh;
-            border: 4px solid var(--gold);
-            box-shadow: 0 0 50px rgba(244, 196, 48, 0.3);
-            display: none; /* Hidden by default, JS toggles it */
-        }
-
-        .close-lightbox {
-            position: absolute;
-            top: 20px;
-            right: 30px;
-            color: #fff;
-            font-size: 3rem;
-            cursor: pointer;
-            font-family: sans-serif;
-            transition: color 0.2s;
-            z-index: 1001;
-        }
-        .close-lightbox:hover { color: var(--gold); }
-
-        /* --- EMPTY STATE --- */
-        #empty-msg {
+        .portal-card {
+            background: var(--card-white);
+            max-width: 600px;
+            width: 100%;
+            border-radius: 12px;
+            border: 5px solid var(--gold);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+            overflow: hidden;
             text-align: center;
-            color: #fff;
-            margin-top: 50px;
-            font-size: 1.2rem;
-            display: none;
+        }
+
+        .card-banner {
+            background: var(--felt-green);
+            background-image: url("https://www.transparenttextures.com/patterns/felt.png");
+            padding: 30px 20px;
+            border-bottom: 5px solid var(--gold);
+        }
+
+        .card-body {
+            padding: 40px 30px;
+        }
+
+        .big-btn {
+            background: var(--gold);
+            color: #000;
+            font-family: 'Rye', serif;
+            font-size: 1.5rem;
+            text-decoration: none;
+            padding: 20px 30px;
+            border-radius: 8px;
+            display: block;
+            margin: 0 auto 20px auto;
+            border: 2px solid #d4af37;
+            box-shadow: 0 5px 15px rgba(244, 196, 48, 0.4);
+            transition: transform 0.2s, background 0.2s;
+        }
+
+        .big-btn:hover {
+            transform: translateY(-3px);
+            background: #fff;
+            box-shadow: 0 8px 20px rgba(244, 196, 48, 0.6);
+        }
+
+        .instruction-list {
+            text-align: left;
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px dashed #ccc;
+            margin-top: 20px;
+            font-size: 0.95rem;
+            color: #555;
+        }
+
+        .instruction-list li {
+            margin-bottom: 10px;
+            list-style: none;
+        }
+
+        .instruction-list li::before {
+            content: "✅";
+            margin-right: 10px;
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
-            .gallery-container { column-count: 2; }
-            .gallery-title { font-size: 1.5rem; }
-        }
         @media (max-width: 480px) {
-            .gallery-container { column-count: 1; }
+            .gallery-title { font-size: 1.5rem; }
+            .big-btn { font-size: 1.2rem; padding: 15px; }
         }
     </style>
 </head>
 <body>
 
     <div class="gallery-header">
-        <h1 class="gallery-title">📸 Gallery</h1>
-        <a href="index.html" class="btn-home">⬅ Back to Tournament Info</a>
+        <h1 class="gallery-title">Tournament Gallery</h1>
+        <a href="index.html" class="btn-home">⬅ Back to Leaderboard</a>
     </div>
 
-    <div id="empty-msg">No photos or videos have been uploaded yet!</div>
-
-    <div class="gallery-container" id="galleryGrid">
-        </div>
-
-    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
-        <span class="close-lightbox">&times;</span>
-        
-        <img class="lightbox-content" id="lightbox-img">
-        
-        <video class="lightbox-content" id="lightbox-video" controls>
-            Your browser does not support the video tag.
-        </video>
-    </div>
-
-    <script>
-        // ========================================================
-        // 👇 CONFIGURATION: ADD YOUR FILENAMES BELOW 👇
-        // ========================================================
-        
-        // 1. Upload your photos (.jpg, .png) AND videos (.mp4) to the "2026SpringFling" folder
-        // 2. Add the filenames inside this list
-        
-        const fileList = [
-            "1.jpeg",
-            "2.jpeg",
-            "3.jpeg",
-            "4.jpeg"
-            // Add more filenames here as needed, e.g., "video1.mp4"
-        ];
-
-        // ========================================================
-        // 👆 END CONFIGURATION 👆
-        // ========================================================
-
-        const grid = document.getElementById('galleryGrid');
-        // Ensure this folder exists and contains your images
-        const folderPath = '2026SpringFling/'; 
-
-        // Load Files
-        if (fileList.length === 0) {
-            document.getElementById('empty-msg').style.display = 'block';
-        } else {
-            fileList.forEach(filename => {
-                const div = document.createElement('div');
-                div.className = 'gallery-item';
-                
-                // Check if file is video (simple check for .mp4)
-                const isVideo = filename.toLowerCase().endsWith('.mp4');
-
-                if (isVideo) {
-                    // Render Video Thumbnail
-                    div.innerHTML = `
-                        <video preload="metadata" muted>
-                            <source src="${folderPath + filename}#t=0.5" type="video/mp4">
-                        </video>
-                        <div class="play-icon">▶</div>
-                    `;
-                    div.onclick = () => openLightbox(folderPath + filename, 'video');
-                } else {
-                    // Render Image
-                    const img = document.createElement('img');
-                    img.src = folderPath + filename;
-                    img.alt = "Tournament Photo";
-                    img.loading = "lazy";
-                    
-                    // Error handling
-                    img.onerror = function() { div.style.display = 'none'; };
-                    
-                    div.appendChild(img);
-                    div.onclick = () => openLightbox(folderPath + filename, 'image');
-                }
-
-                grid.appendChild(div);
-            });
-        }
-
-        // Lightbox Functions
-        function openLightbox(src, type) {
-            const lightbox = document.getElementById('lightbox');
-            const lbImg = document.getElementById('lightbox-img');
-            const lbVideo = document.getElementById('lightbox-video');
-
-            // Reset
-            lbImg.style.display = 'none';
-            lbVideo.style.display = 'none';
-            lbVideo.pause(); // Stop any previous video
-
-            if (type === 'video') {
-                lbVideo.src = src;
-                lbVideo.style.display = 'block';
-                // Optional: Auto play when opened
-                // lbVideo.play(); 
-            } else {
-                lbImg.src = src;
-                lbImg.style.display = 'block';
-            }
-
-            lightbox.style.display = 'flex';
-        }
-
-        function closeLightbox() {
-            const lightbox = document.getElementById('lightbox');
-            const lbVideo = document.getElementById('lightbox-video');
+    <div class="main-content">
+        <div class="portal-card">
             
-            lightbox.style.display = 'none';
-            lbVideo.pause(); // Stop audio/video when closing
-            lbVideo.currentTime = 0;
-        }
-    </script>
+            <div class="card-banner">
+                <div style="font-size: 5rem;">📸</div>
+                <h2 style="color:white; font-family:'Rye', serif;">The 2026 Collection</h2>
+            </div>
+
+            <div class="card-body">
+                <p style="font-size: 1.1rem; margin-bottom: 30px; line-height: 1.6;">
+                    We are using <strong>Google Photos</strong> to host all videos and pictures in high quality.
+                </p>
+
+                <a href="https://photos.app.goo.gl/hHuuv2AvnZfAs38Q8" target="_blank" class="big-btn">
+                    OPEN SHARED ALBUM
+                </a>
+
+                <div class="instruction-list">
+                    <ul>
+                        <li><strong>View</strong> all photos and high-res videos.</li>
+                        <li><strong>Upload</strong> your own shots directly from your phone.</li>
+                        <li><strong>Like & Comment</strong> on the best swings (and worst putts).</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
 
 </body>
 </html>
