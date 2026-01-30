@@ -16,6 +16,7 @@
             --card-white: #fdfdfd;
             --text-dark: #222;
             --red-accent: #b71c1c; 
+            --zelle-purple: #6d1ed1;
         }
 
         /* --- RESET & BASIC SETUP --- */
@@ -447,6 +448,70 @@
             margin-top: 20px; text-align: center;
         }
 
+        /* --- DIGITAL PAYMENTS (ADD-ON) --- */
+.digital-payment-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 18px;
+    margin-top: 20px;
+}
+
+.pay-method {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    padding: 18px;
+    border-radius: 10px;
+    text-align: left;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: transform 0.2s;
+}
+
+.pay-method:hover { transform: translateY(-3px); }
+
+.pay-method.preferred {
+    border: 2px solid var(--zelle-purple);
+    background: #f9f5ff;
+    position: relative;
+}
+
+.preferred-tag {
+    background: var(--zelle-purple);
+    color: white;
+    font-size: 0.75rem;
+    padding: 4px 12px;
+    border-radius: 20px;
+    position: absolute;
+    top: -12px;
+    right: 15px;
+    font-weight: bold;
+}
+
+.pay-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.pay-logo {
+    height: 26px;
+    width: auto;
+    object-fit: contain;
+}
+
+.copy-box {
+    background: #f0f0f0;
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    color: #d32f2f;
+    display: inline-block;
+    border: 1px dashed #bbb;
+    margin: 6px 0;
+}
+
+
         /* --- PARTY MAP BOX --- */
         .party-box {
             margin-top: 40px; padding-top: 30px; border-top: 2px solid #eee;
@@ -685,6 +750,7 @@
                 <h3 style="color: var(--felt-green); font-size: 1.4rem;">Pre-Tournament Party</h3>
                 <p style="font-size: 1.1rem; margin: 10px 0; font-weight: bold;">Monday, March 16th @ 5:00 PM</p>
                 <p style="color: #555;">Team Draft & Briefing at <strong>House of Carts</strong></p>
+                <p style="font-size: 1.0rem; margin-top: 10px; font-weight: bold; color: #222;">BBQ sandwich, chips, and drinks provided at the pre-tournament party.”</p>
                 
                 <button class="modal-btn" onclick="closeModal()">CLOSE</button>
             </div>
@@ -852,8 +918,59 @@
                         <hr style="margin: 15px auto; border-color: #d4af37; width: 50%;">
                         <p style="text-align: center;">
                             If paying by check, make payable to:<br>
-                            <strong>TIM HUGHES</strong> or <strong>JEFF WATTS</strong>
+                            <strong>TIM HUGHES</strong>
                         </p>
+                        <hr style="margin: 20px auto; border-color: #d4af37; width: 60%;">
+
+<h3 style="color: var(--felt-green); font-size: 1.4rem; margin-bottom: 10px;">
+    DIGITAL PAYMENT OPTIONS
+</h3>
+<p style="font-size: 0.95rem; color: #444; margin-bottom: 5px;">
+    If you’d rather not do cash/check, you can send digitally to the number below.
+</p>
+
+<div class="digital-payment-grid">
+
+    <div class="pay-method preferred">
+        <span class="preferred-tag">MOST PREFERRED</span>
+        <div class="pay-header">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/1/16/Zelle_logo.jpg" class="pay-logo" alt="Zelle">
+            <h4 style="margin:0;">Zelle</h4>
+        </div>
+        <ol style="margin: 0; padding-left: 18px; line-height: 1.6;">
+            <li>Open your bank app.</li>
+            <li>Send Money with Zelle.</li>
+            <li>Send to: <div class="copy-box">8172336462</div></li>
+            <li>Confirm recipient: <strong>Jeff Watts</strong></li>
+        </ol>
+    </div>
+
+    <div class="pay-method">
+        <div class="pay-header">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Apple_Pay_logo.svg" class="pay-logo" alt="Apple Pay">
+            <h4 style="margin:0;">Apple Pay</h4>
+        </div>
+        <ol style="margin: 0; padding-left: 18px; line-height: 1.6;">
+            <li>Open Messages.</li>
+            <li>Text: <div class="copy-box">8172336462</div></li>
+            <li>Tap Apple Cash, enter amount, and send.</li>
+        </ol>
+    </div>
+
+    <div class="pay-method">
+        <div class="pay-header">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Venmo_Logo.svg" class="pay-logo" alt="Venmo">
+            <h4 style="margin:0;">Venmo</h4>
+        </div>
+        <ol style="margin: 0; padding-left: 18px; line-height: 1.6;">
+            <li>Open Venmo.</li>
+            <li>Search: <div class="copy-box">8172336462</div></li>
+            <li>Recipient: <strong>Jeff Watts</strong></li>
+        </ol>
+    </div>
+
+</div>
+
                         <p style="font-size: 0.9rem; margin-top: 15px; color: #666;">
                             *Tournament fee covers trophies, gifts, and party operations. Cypress Bend Green Fees and Hotel are separate.
                         </p>
@@ -863,6 +980,7 @@
                         <h3 style="color: var(--felt-green); font-size: 1.6rem;">♣ Pre-Tournament Party ♣</h3>
                         <p style="margin-top: 10px; font-size: 1.2rem;"><strong>Monday, March 16th @ 5:00 PM</strong></p>
                         <p style="font-style: italic; color: #555;">Mandatory Meeting & Team Draft</p>
+                        <p style="margin-top: 10px; font-size: 1.05rem; font-weight: bold; color: #333;">BBQ sandwich, chips, and drinks provided at the pre-tournament party.”</p>
                         
                         <div style="margin: 20px 0;">
                             <h4 style="color: var(--wood); font-family: 'Rye', serif;">LOCATION: HOUSE OF CARTS</h4>
@@ -1142,21 +1260,64 @@
                 </div>
 
                 <div class="card">
-                    <img src="https://ranchgolftrips.com/Wyndham.png" alt="Wyndham @ Cypress Bend" class="card-img-top">
-                    <div class="card-header" style="background: var(--bright-green);">
-                        <h3>Wyndham @ Cypress Bend</h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="detail-row"><span class="icon">📅</span> <strong>ONE NIGHT:</strong> Mar 24</div>
-                        <p>Stay right on the property at the lake.</p>
-                        <div style="background: #f9f9f9; border: 1px solid #ddd; padding: 10px; margin-top: 15px; border-radius: 4px; font-size: 0.9rem;">
-                            <p><strong>Hotel Guest Room:</strong> $146.41 (Inc. Tax)</p>
-                            <p><strong>Round of Golf:</strong> $60.42 (Inc. Tax)</p>
-                            <hr style="margin: 5px 0;">
-                            <p><strong>Total Tuesday: $206.83 per golfer</strong></p>
-                        </div>
-                    </div>
-                </div>
+    <img src="https://ranchgolftrips.com/Wyndham.png" alt="Wyndham @ Cypress Bend" class="card-img-top">
+    
+    <div class="card-header" style="background: var(--bright-green);">
+        <h3>Wyndham @ Cypress Bend</h3>
+    </div>
+
+    <div class="card-body">
+        <div class="detail-row">
+            <span class="icon">📅</span> <strong>ONE NIGHT:</strong> Mar 24
+        </div>
+
+        <p>Stay right on the property at the lake.</p>
+
+        <!-- UPDATED COST BREAKDOWN -->
+        <div style="
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 12px;
+            margin-top: 15px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        ">
+
+            <p style="margin-bottom: 10px; font-weight: bold; color: #333;">
+                WYNDHAM + GOLF COST BREAKDOWN (TUESDAY)
+            </p>
+
+            <div style="margin-bottom: 10px;">
+                <p><strong>Hotel (1 guest room / 1 person per room):</strong></p>
+                <p>
+                    $130.00 room rate × 12.625% hotel tax = <strong>$146.41</strong>
+                </p>
+            </div>
+
+            <div style="margin-bottom: 10px;">
+                <p><strong>Golf (per golfer / 18 holes):</strong></p>
+                <p>
+                    $55.00 green fee + 9.85% tax = <strong>$60.42</strong>
+                    <span style="color:#666;">(includes shared golf cart)</span>
+                </p>
+            </div>
+
+            <hr style="margin: 10px 0; border: 0; border-top: 1px solid #ccc;">
+
+            <p style="font-size: 1rem;">
+                <strong>Total:</strong> $146.41 + $60.42 =
+                <strong style="color: var(--red-accent);">$206.83 per golfer</strong>
+            </p>
+
+            <p style="margin-top: 6px; color: #666; font-size: 0.85rem;">
+                Includes one night lodging (single guest room per player) plus tax,
+                and one round of golf plus tax.
+            </p>
+        </div>
+    </div>
+</div>
+
 
             </div>
         </div>
